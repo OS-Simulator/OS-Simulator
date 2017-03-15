@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>demo:posts</title>
+    <link rel="stylesheet" href="">
+    <style>
+    .card {
+        border: 1px solid green;
+        padding: 10px;
+        margin: 10px;
+    }
+    [disabled]{
+        background-color: white;
+        border:0px black;
+    }
+    </style>
+    <script>
+    var stuff = [];
+
+    function addToList() {
+        // body...
+        var arrivaltime = document.getElementById("newarrivaltime").value;
+        var bursttime = document.getElementById("newbursttime").value;
+        stuff.push({
+            "arrivaltime": arrivaltime,
+            "bursttime": bursttime
+        });
+        //arrivaltime.value="";
+        //bursttime.value="";
+        displayList();
+        document.getElementById("newarrivaltime").value="";
+        document.getElementById("newbursttime").value="";
+    }
+    function edit(id) {
+        var pos = parseInt(id.substr(3));
+        var button = document.getElementById(id);
+        button.innerHTML = "SAVE";
+        button.setAttribute("onclick", "save(" + pos + ")");
+        document.getElementById("arrivaltime" + pos).removeAttribute("disabled");
+        document.getElementById("bursttime" + pos).removeAttribute("disabled");
+    }
+    function save(pos) {
+        stuff[pos].arrivaltime = document.getElementById("arrivaltime" + pos).value;
+        stuff[pos].bursttime = document.getElementById("bursttime" + pos).value;
+        displayList();
+    }
+    function displayList() {
+        var output = document.getElementById("output");
+        //Clear the op
+        output.innerHTML = '';
+        for (var i = 0; i < stuff.length; i++) {
+            var card = document.createElement("div");
+            card.setAttribute("class", "card");
+            var input1 = document.createElement("input");
+            input1.value = stuff[i].arrivaltime;
+            input1.setAttribute("disabled", "disabled");
+            input1.setAttribute("id", "arrivaltime" + i);
+            var input2 = document.createElement("input");
+            input2.value = stuff[i].bursttime;
+            input2.setAttribute("disabled", "disabled");
+            input2.setAttribute("id", "bursttime" + i);
+            var btn = document.createElement("button");
+            var textNode = document.createTextNode("EDIT");
+            btn.appendChild(textNode);
+            btn.setAttribute("id", "btn" + i);
+            btn.setAttribute("onclick", "edit(this.id)");
+            card.appendChild(input1);
+            card.appendChild(input2);
+            card.appendChild(btn);
+            output.appendChild(card);
+        }
+    }
+    function download() {
+        var text = JSON.stringify(stuff);
+        filearrivaltime = "stuff.json";
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filearrivaltime);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+
+    }
+    
+    </script>
+</head>
+
+<body>
+    <div class="note">
+    
+        <button onclick="download()">Generate JSON</button>
+        <button id="sender">Send the entire data</button>
+    </div>
+    <div id="output">
+    </div>
+    <div class="card">
+        Enter arrival time:
+        <input id="newarrivaltime" type="text" value=""></input>
+        <br> Enter burst time:
+        <input id="newbursttime" type="text" value=""></input>
+        <br>
+        <button onclick="addToList()">Add</button>
+    </div>
+</body>
+
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $('#sender').click(function(){
+ /*      // console.log(stuff);
+       $.ajax({
+  url: "/api/gateway",
+  type: 'POST',
+  
+  data: JSON.stringify({
+    stuff: stuff
+  }),
+  error: function(e) {
+    console.log(e);
+  },
+  dataType: "json",
+  contentType: "application/json; charset=utf-8"
+  
+});*/
+    var text = JSON.stringify(stuff);
+    //console.log(text);
+    $.post('/api/gateway',{data: text},function(result){
+        console.log("Done");
+    });
+});
+</script>
