@@ -11,8 +11,8 @@
 </head>
 
 <script>
-var sequence = [{start: 0, n:1},{start: 2,n:2},{start: 4,n:3},{start: 7,n:1},{start: 11,n:-1}];
-var total = 4;
+var sequence = [{start: 0,end:2,no:1},{start: 2,end:4,no:2},{start: 4,end:7,no:-1},{start: 7,end:11,no:1}];
+var total = sequence.length;
 var pixel = 0;
 function toColor(num) {
     num >>>= 0;
@@ -31,7 +31,7 @@ function toColor(num) {
 		"tat":50,
 
 		},
-	     {	
+	     {
 		"at":30,
 		"bt":50,
 		"ct":40,
@@ -39,7 +39,7 @@ function toColor(num) {
 		"tat":50,
 
 		},
-	     { 
+	     {
 		"at":60,
 		"bt":70,
 		"ct":40,
@@ -55,7 +55,7 @@ function toColor(num) {
 		"tat":50,
 
 		},
-	     {	
+	     {
 		"at":30,
 		"bt":50,
 		"ct":40,
@@ -63,7 +63,7 @@ function toColor(num) {
 		"tat":50,
 
 		},
-	     { 
+	     {
 		"at":60,
 		"bt":70,
 		"ct":40,
@@ -75,16 +75,16 @@ function toColor(num) {
 function drawTable(){
 	var i=0;
 	for(i=0;i<a.length;++i){
-		var table = document.getElementById("ptable");	
+		var table = document.getElementById("ptable");
 		console.log(a[i]);
 		$("#ptable").append("<tr><td>"+a[i].at+"</td><td>"+a[i].bt+"</td><td>"+a[i].ct+"</td><td>"+a[i].wt+"</td><td>"+a[i].tat+"</td></tr>");
 	}
-  
+
 }
 $(document).ready(function(){
   $('#start').click(function(){
     var i = 0;
-    var totalTime = sequence[total].start;
+    var totalTime = sequence[total-1].end;
     pixel = parseInt(800/totalTime);
     var containerWidth = pixel*totalTime + 2;
     $('#outer-div').css('width',containerWidth+'px');
@@ -95,14 +95,16 @@ $(document).ready(function(){
       drawTable();
       return;
     }
-    $("#comments").append("<br>Process "+sequence[i].n+" entered CPU at "+sequence[i].start+" and is being executed<br>");
-    var blockWidth = (sequence[i+1].start - sequence[i].start)*pixel;
-    var processName = sequence[i].n;
-    $('#outer-div').append('<div class="block" id="process-'+sequence[i].start +'">P-'+ sequence[i].n +'<div class="bottom">'+ sequence[i+1].start +'</div></div>');
+    if(sequence[i].no == -1) $("#comments").append("<br>CPU is idle<br>");
+    else $("#comments").append("<br>Process "+sequence[i].no+" entered CPU at "+sequence[i].start+" and is being executed<br>");
+    var blockWidth = (sequence[i].end - sequence[i].start)*pixel;
+    var processName = sequence[i].no;
+    if(sequence[i].no == -1) $('#outer-div').append('<div class="block" id="process-'+sequence[i].start +'">CPU IDLE' +'<div class="bottom">'+ sequence[i].end +'</div></div>');
+    $('#outer-div').append('<div class="block" id="process-'+sequence[i].start +'">P-'+ sequence[i].no +'<div class="bottom">'+ sequence[i].end +'</div></div>');
     $('#process-'+sequence[i].start).css('width',blockWidth);
-    $('#process-'+sequence[i].start).css('background-color',toColor(sequence[i].n - 500000*sequence[i].n*sequence[i].n*sequence[i].n*sequence[i].n));
+    if(sequence[i].no != -1)
+    $('#process-'+sequence[i].start).css('background-color',toColor(sequence[i].no - 500000*sequence[i].no*sequence[i].no*sequence[i].no*sequence[i].no));
     $('#process-'+sequence[i].start).fadeIn('slow',function(){
-      $("#comments").append("<br>Process "+sequence[i].n+" is being swapped out<br>");
       displayBlock(i+1);
     });
   }
@@ -243,9 +245,7 @@ body{
 	<th>completion time</th>
 	<th>waiting time</th>
 	<th>turn-around time</th>
-	
+
   </div>
 </body>
 </html>
-
-
