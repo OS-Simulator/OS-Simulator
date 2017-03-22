@@ -7,7 +7,7 @@ class DiskSchedAlg(models.Model):
 
     name = models.CharField(max_length=200)
     description = models.TextField()
-    demourl = models.CharField(max_length=200)
+    demourl = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name

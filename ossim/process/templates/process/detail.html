@@ -1,0 +1,6 @@
+{{ alg.name }}
+{{ alg.description }}
+
+{% for adv in alg.adv_set.all %}
+{{adv.text}}
+{% endfor %}
