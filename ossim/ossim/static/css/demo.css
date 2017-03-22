@@ -1,0 +1,39 @@
+body{
+  text-align: center;
+}
+#outer-div{
+  margin: auto;
+  width: 802px;
+  height: 100px;
+  position: relative;
+  border: 1px solid black;
+}
+.block{
+  position: relative;
+  display: none;
+  border-right: 1px solid black;
+  float: left;
+  text-align: center;
+  height: 98px;
+}
+.bottom{
+  position: absolute;
+  width: 100%;
+  margin-top: 100px;
+  text-align: right;
+  margin-bottom: 1;
+}
+body{
+	padding: 10px;
+	text-align: left;
+}
+/*input */
+	.card {
+        border: 1px solid green;
+        padding: 10px;
+        margin-top: 10px;
+    }
+    [disabled]{
+        background-color: white;
+        border:0px black;
+    }

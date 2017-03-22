@@ -1,0 +1,6 @@
+{% for alg in algos %}
+    <a href="{% url 'process:detail' alg.id %}">
+      {{alg.name}}
+    </a>
+    <br>
+{% endfor %}
