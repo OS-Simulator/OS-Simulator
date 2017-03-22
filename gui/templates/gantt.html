@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Gantt Chart - GUI
+  </title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<script>
+
+var sequence = [{start: 0, n:1},{start: 2,n:2},{start: 4,n:3},{start: 7,n:1},{start: 11,n:-1}];
+var total = 4;
+var pixel = 0;
+
+$(document).ready(function(){
+  $('#start').click(function(){
+    var i = 0;
+    var totalTime = sequence[total].start;
+    pixel = parseInt(800/totalTime);
+    var containerWidth = pixel*totalTime + 2;
+    $('#outer-div').css('width',containerWidth+'px');
+    displayBlock(i);
+  })
+
+  function displayBlock(i){
+    if(i == total){
+      return;
+    }
+
+    var blockWidth = (sequence[i+1].start - sequence[i].start)*pixel;
+    var processName = sequence[i].n;
+    $('#outer-div').append('<div class="block" id="process-'+sequence[i].start +'">P-'+ sequence[i].n +'<div class="bottom">'+ sequence[i+1].start +'</div></div>');
+    $('#process-'+sequence[i].start).css('width',blockWidth);
+
+    $('#process-'+sequence[i].start).fadeIn('slow',function(){
+      displayBlock(i+1);
+    });
+
+  }
+});
+</script>
+<style>
+body{
+  text-align: center;
+}
+
+#outer-div{
+  margin: auto;
+  width: 802px;
+  height: 100px;
+  position: relative;
+  border: 1px solid black;
+}
+
+.block{
+  position: relative;
+  display: none;
+  border-right: 1px solid black;
+  float: left;
+  text-align: center;
+  background-color: rgba(112, 128, 144, 0.44);
+  height: 98px;
+}
+
+.bottom{
+  position: absolute;
+  width: 100%;
+  margin-top: 100px;
+  text-align: right;
+  margin-bottom: 1;
+}
+</style>
+<body>
+  <h1>
+    Gantt Chart
+  </h1>
+  <br>
+  <br>
+  <button id="start">Start</button>
+  <br>
+  <br>
+  <div id="outer-div">
+  </div>
+</body>
+</html>

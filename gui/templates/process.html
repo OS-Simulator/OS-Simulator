@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Gantt Chart - GUI
+  </title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<script>
+var sequence = [{start: 0,end:2,no:1},{start: 2,end:4,no:2},{start: 4,end:7,no:-1},{start: 7,end:11,no:1}];
+var total = sequence.length;
+var pixel = 0;
+function toColor(num) {
+    num >>>= 0;
+    var b = num & 0xFF,
+        g = (num & 0xFF00) >>> 8,
+        r = (num & 0xFF0000) >>> 16,
+        a = ( (num & 0xFF000000) >>> 24 ) / 255 ;
+    return "rgba(" + [r, g, b, a].join(",") + ")";
+}
+
+    var a = [{
+		"at":10,
+		"bt":20,
+		"ct":40,
+		"wt":20,
+		"tat":50,
+
+		},
+	     {
+		"at":30,
+		"bt":50,
+		"ct":40,
+		"wt":20,
+		"tat":50,
+
+		},
+	     {
+		"at":60,
+		"bt":70,
+		"ct":40,
+		"wt":20,
+		"tat":50,
+
+		},
+		{
+		"at":10,
+		"bt":20,
+		"ct":40,
+		"wt":20,
+		"tat":50,
+
+		},
+	     {
+		"at":30,
+		"bt":50,
+		"ct":40,
+		"wt":20,
+		"tat":50,
+
+		},
+	     {
+		"at":60,
+		"bt":70,
+		"ct":40,
+		"wt":20,
+		"tat":50,
+
+		}
+	    ];
+function drawTable(){
+	var i=0;
+	for(i=0;i<a.length;++i){
+		var table = document.getElementById("ptable");
+		console.log(a[i]);
+		$("#ptable").append("<tr><td>"+a[i].at+"</td><td>"+a[i].bt+"</td><td>"+a[i].ct+"</td><td>"+a[i].wt+"</td><td>"+a[i].tat+"</td></tr>");
+	}
+
+}
+$(document).ready(function(){
+  $('#start').click(function(){
+    var i = 0;
+    var totalTime = sequence[total-1].end;
+    pixel = parseInt(800/totalTime);
+    var containerWidth = pixel*totalTime + 2;
+    $('#outer-div').css('width',containerWidth+'px');
+    displayBlock(i);
+  })
+  function displayBlock(i){
+    if(i == total){
+      drawTable();
+      return;
+    }
+    if(sequence[i].no == -1) $("#comments").append("<br>CPU is idle<br>");
+    else $("#comments").append("<br>Process "+sequence[i].no+" entered CPU at "+sequence[i].start+" and is being executed<br>");
+    var blockWidth = (sequence[i].end - sequence[i].start)*pixel;
+    var processName = sequence[i].no;
+    if(sequence[i].no == -1) $('#outer-div').append('<div class="block" id="process-'+sequence[i].start +'">CPU IDLE' +'<div class="bottom">'+ sequence[i].end +'</div></div>');
+    $('#outer-div').append('<div class="block" id="process-'+sequence[i].start +'">P-'+ sequence[i].no +'<div class="bottom">'+ sequence[i].end +'</div></div>');
+    $('#process-'+sequence[i].start).css('width',blockWidth);
+    if(sequence[i].no != -1)
+    $('#process-'+sequence[i].start).css('background-color',toColor(sequence[i].no - 500000*sequence[i].no*sequence[i].no*sequence[i].no*sequence[i].no));
+    $('#process-'+sequence[i].start).fadeIn('slow',function(){
+      displayBlock(i+1);
+    });
+  }
+});
+// input
+	var stuff = [];
+    function addToList() {
+        // body...
+        var arrivaltime = document.getElementById("newarrivaltime").value;
+        var bursttime = document.getElementById("newbursttime").value;
+        stuff.push({
+            "arrivaltime": arrivaltime,
+            "bursttime": bursttime
+        });
+        //arrivaltime.value="";
+        //bursttime.value="";
+        displayList();
+        document.getElementById("newarrivaltime").value="";
+        document.getElementById("newbursttime").value="";
+    }
+    function edit(id) {
+        var pos = parseInt(id.substr(3));
+        var button = document.getElementById(id);
+        button.innerHTML = "SAVE";
+        button.setAttribute("onclick", "save(" + pos + ")");
+        document.getElementById("arrivaltime" + pos).removeAttribute("disabled");
+        document.getElementById("bursttime" + pos).removeAttribute("disabled");
+    }
+    function save(pos) {
+        stuff[pos].arrivaltime = document.getElementById("arrivaltime" + pos).value;
+        stuff[pos].bursttime = document.getElementById("bursttime" + pos).value;
+        displayList();
+    }
+    function displayList() {
+        var output = document.getElementById("output");
+        //Clear the op
+        output.innerHTML = '';
+        for (var i = 0; i < stuff.length; i++) {
+            var card = document.createElement("div");
+            card.setAttribute("class", "card");
+            var input1 = document.createElement("input");
+            input1.value = stuff[i].arrivaltime;
+            input1.setAttribute("disabled", "disabled");
+            input1.setAttribute("id", "arrivaltime" + i);
+            var input2 = document.createElement("input");
+            input2.value = stuff[i].bursttime;
+            input2.setAttribute("disabled", "disabled");
+            input2.setAttribute("id", "bursttime" + i);
+            var btn = document.createElement("button");
+            var textNode = document.createTextNode("EDIT");
+            btn.appendChild(textNode);
+            btn.setAttribute("id", "btn" + i);
+            btn.setAttribute("onclick", "edit(this.id)");
+            card.appendChild(input1);
+            card.appendChild(input2);
+            card.appendChild(btn);
+            output.appendChild(card);
+        }
+    }
+</script>
+<style>
+body{
+  text-align: center;
+}
+#outer-div{
+  margin: auto;
+  width: 802px;
+  height: 100px;
+  position: relative;
+  border: 1px solid black;
+}
+.block{
+  position: relative;
+  display: none;
+  border-right: 1px solid black;
+  float: left;
+  text-align: center;
+  height: 98px;
+}
+.bottom{
+  position: absolute;
+  width: 100%;
+  margin-top: 100px;
+  text-align: right;
+  margin-bottom: 1;
+}
+body{
+	padding: 10px;
+	text-align: left;
+}
+/*input */
+	.card {
+        border: 1px solid green;
+        padding: 10px;
+        margin-top: 10px;
+    }
+    [disabled]{
+        background-color: white;
+        border:0px black;
+    }
+</style>
+<body>
+  <h1>
+    Process Scheduling : Round-Robin
+  </h1>
+  <br>
+  <br>
+  <div class="note">
+	<button id="sender">Send the entire data</button>
+  </div>
+    <div id="output">
+    </div>
+    <div class="card">
+        Enter arrival time:
+        <input id="newarrivaltime" type="text" value=""></input>
+        <br> Enter burst time:
+        <input id="newbursttime" type="text" value=""></input>
+        <br>
+        <button onclick="addToList()">Add</button>
+    </div>
+  <br>
+  <br>
+  <button id="start">Start</button>
+  <br>
+  <br>
+  <div id="outer-div">
+  </div>
+  <br><br><br>
+  <div id="comments">
+  	<h1>Operations Taking Place</h1><br><br>
+  </div>
+  <br><br><br>
+  <div>
+  	<h1>Table</h1><br><br>
+	<table id="ptable" class="table table-hover">
+	<th>Arrival time</th>
+	<th>Burst time</th>
+	<th>completion time</th>
+	<th>waiting time</th>
+	<th>turn-around time</th>
+
+  </div>
+</body>
+</html>
