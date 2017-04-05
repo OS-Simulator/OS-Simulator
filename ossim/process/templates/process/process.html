@@ -12,33 +12,40 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 
 <body>
-  <h1>
+  <h1 style="text-align:center;">
     Process Scheduling : Round-Robin
   </h1>
   <br>
   <br>
   <div class="note">
-	<button id="sender">Send the entire data</button>
-  <button onclick="download()">Generate JSON</button>
+	<button id="sender" class="btn btn-primary">Send the entire data</button>
+  <!-- <button onclick="download()">Generate JSON</button> -->
   </div>
     <div id="output">
     </div>
-    
+
     <div class="card">
         Enter arrival time:
-        <input id="newarrivaltime" type="text" value=""></input>
-        <br> Enter burst time:
-        <input id="newbursttime" type="text" value=""></input>
-        <br>
-        <button onclick="addToList()">Add</button>
+        <input style="width:200px;"id="newarrivaltime" class="form-control" type="text" value=""></input>
+         Enter burst time:
+        <input style="width:200px;position:relative;" id="newbursttime" class="form-control" type="text" value=""></input>
+        <button class="btn" onclick="addToList()">Add</button>
     </div>
   <br>
   <br>
 
+  <label for="sel1">Select Algorithm to be used :</label>
+      <select class="form-control" id="sel1" style="width:400px;">
+        <option>First come first serve(FCFS)</option>
+        <option>Shortest job first(SJF)</option>
+        <option>Round-Robin(RR)</option>
+        <option>Priority scheduling</option>
+      </select>
 
   <br>
   <br>
@@ -86,4 +93,7 @@
 
     });
 
+    $("#sel1").click(function(){
+      alert($("#sel1").val()); // use this to get algorithm to be used
+    })
 </script>
