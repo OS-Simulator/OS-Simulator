@@ -29,6 +29,10 @@ def gateway(request):
     if request.method == 'POST':
         data = request.POST.get('value')
         data = json.loads(data)
-        result = rr(data)
+        alg = request.POST.get('algo')
+        alg=json.loads(alg)
+        print(alg)
+        if(alg=="RR"):
+            result = rr(data)
         print(result)
     return JsonResponse(result)

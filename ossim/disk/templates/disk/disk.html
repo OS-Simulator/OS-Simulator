@@ -1,0 +1,55 @@
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <h1 style="text-align:center;">Disk Scheduling</h1>
+  <button id="sender" class="btn btn-primary">Send</button>
+  <div id="chart_div"></div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script>
+
+
+	var a = [
+[20,-0],[50,-1],[100,-2],[10,-3],[5,-4]
+  ];//Array of Array format : [order of access,Cylinder number]
+
+  var data = {'cyl':10, 'current':3, 'prev':2, 'requests':[1,5,7,2,3], 'n':5};
+
+  	function drawBackgroundColor() {
+  	      var data = new google.visualization.DataTable();
+  	      data.addColumn('number', 'Cylinder');
+  	      data.addColumn('number', 'order');
+
+  	      data.addRows(a);
+
+  	      var options = {
+  		hAxis: {
+  		  title: 'Cylinder Number'
+  		},
+      pointSize: 20,
+      animation:{
+          duration: 1000,
+          easing: 'out',
+        },
+  		vAxis: {
+  		  title: '',
+        baselineColor: 'none',
+        ticks: []
+  		},
+  		backgroundColor: '#f1f8e9',
+  		legend: {position: 'none'}
+  	      };
+
+  	      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+  	      chart.draw(data, options);
+  	    }
+  $('#sender').click(function(){
+  var text = JSON.stringify(data);
+  //console.log(text);
+  $.post('/disk/gateway/',{value:text}, function(result){
+    a=result['output'];
+    google.charts.load('current', {packages: ['corechart', 'line']});
+  	google.charts.setOnLoadCallback(drawBackgroundColor);
+  });
+
+});
+
+
+  </script>

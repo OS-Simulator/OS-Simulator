@@ -17,7 +17,8 @@
 
 
 <body>
-  <h1 style="text-align:center;">
+  <h1 style="text-alig
+    var text = JSON.strn:center;">
     Process Scheduling : Round-Robin
   </h1>
   <br>
@@ -44,7 +45,7 @@
         <option>First come first serve(FCFS)</option>
         <option>Shortest job first(SJF)</option>
         <option>Round-Robin(RR)</option>
-        <option>Priority scheduling</option>
+
       </select>
 
   <br>
@@ -76,8 +77,9 @@
 
 
     var text = JSON.stringify(stuff);
+    var alg = JSON.stringify($("#sel1").val().split("(")[1].split(")")[0])
     //console.log(text);
-    $.post('/process/gateway/',{value:text}, function(result){
+    $.post('/process/gateway/',{value:text, algo:alg}, function(result){
       sequence = result["gantt"];
       a = result["table"]
       total = sequence.length;
