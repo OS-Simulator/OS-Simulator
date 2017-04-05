@@ -8,6 +8,7 @@ from django.http import JsonResponse
 # Create your views here.
 from . models import MemSchedAlg
 from . utils import fifo as ff
+from . utils import lru,opt
 
 def home(request):
     algos = MemSchedAlg.objects.all()
@@ -33,8 +34,10 @@ def fifo(request):
         size = json.loads(data)
 
         data = {'requests': requests, 'size':size}
-        print(data)
-        print("Reached")
-        result = ff(data)
-        print(result)
+
+        result_ff = ff(data)
+        result_lru = lru(data)
+        result_opt = opt(data)
+
+        result = {'fifo': result_ff, 'lru':result_lru, 'opt':result_opt}
     return JsonResponse(result)

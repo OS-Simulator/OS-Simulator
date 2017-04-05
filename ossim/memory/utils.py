@@ -101,7 +101,7 @@ def lru(data):
 
 	return output
 
-def optimum(data):
+def opt(data):
 	cache_size = data["size"]
 	requests = data["requests"]
 	cache = [-1 for _ in range(cache_size)]
