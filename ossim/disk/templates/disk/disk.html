@@ -1,16 +1,55 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <h1 style="text-align:center;">Disk Scheduling</h1>
-  <button id="sender" class="btn btn-primary">Send</button>
-  <div id="chart_div"></div>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <body style="padding:10px;">
+  <h1 style="text-align:center;background-color:#337ab7;color:white;">Disk Scheduling</h1>
+  <div style="height:60px;">
+  <div style="width:200px;float:left;margin-right:10px;">
+  <label for="cur">Current position:</label>
+  <input type="text" class="form-control" id="cur">
+  </div>
+
+  <div style="width:200px;float:left;margin-right:10px;">
+  <label for="prev">Previous request:</label>
+  <input type="text" class="form-control" id="prev">
+  </div>
+
+  <div style="width:600px ;float:left;margin-right:10px;">
+  <label for="req">Requests (space seperated):</label>
+  <input type="text" class="form-control" id="req">
+  </div>
+</div>
+  <div style="height:100px;">
+  <div style="width:200px;float:left;">
+  <label for="cyl">Number of Cylinders:</label>
+  <input style="width:200px;" type="text" class="form-control" id="cyl">
+  </div>
+
+  <div style="width:200px;float:left;margin-left:10px;">
+    <label for="sel1">Select Algorithm:</label>
+    <select class="form-control" id="sel1" style="width:200px;">
+      <option>FCFS</option>
+      <option>SSTF</option>
+      <option>CSCAN</option>
+      <option>SCAN</option>
+      <option>CLOOK</option>
+      <option>LOOK</option>
+    </select>
+  </div>
+  <button id="sender" class="btn btn-primary" style="float:left;margin-top:25px;margin-left:10px;">Send</button>
+</div>
+
+  <div id="chart_div" style="margin-top:30px;"></div>
+  </body>
   <script>
 
+var a;
+// 	var a = [
+// [20,-0],[50,-1],[100,-2],[10,-3],[5,-4]
+//   ];//Array of Array format : [order of access,Cylinder number]
 
-	var a = [
-[20,-0],[50,-1],[100,-2],[10,-3],[5,-4]
-  ];//Array of Array format : [order of access,Cylinder number]
-
-  var data = {'cyl':10, 'current':3, 'prev':2, 'requests':[1,5,7,2,3], 'n':5};
 
   	function drawBackgroundColor() {
   	      var data = new google.visualization.DataTable();
@@ -23,10 +62,10 @@
   		hAxis: {
   		  title: 'Cylinder Number'
   		},
-      pointSize: 20,
+      pointSize: 10,
       animation:{
           duration: 1000,
-          easing: 'out',
+          easing: 'in',
         },
   		vAxis: {
   		  title: '',
@@ -41,6 +80,20 @@
   	      chart.draw(data, options);
   	    }
   $('#sender').click(function(){
+  var irequests = $("#req").val().split(" ");
+  console.log(irequests);
+  var icyl = $("#cyl").val();
+  console.log(icyl);
+  var ialg = $("#sel1").val();
+  console.log(ialg);
+  var icur = $("#cur").val();
+  console.log(icur);
+  var iprev = $("#prev").val();
+  console.log(iprev);
+
+  var data = {'cyl':icyl, 'current':icur, 'prev':iprev, 'requests':irequests, 'n':irequests.length};
+  console.log(data);
+
   var text = JSON.stringify(data);
   //console.log(text);
   $.post('/disk/gateway/',{value:text}, function(result){
