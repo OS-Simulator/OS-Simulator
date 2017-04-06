@@ -1,25 +1,16 @@
 from operator import itemgetter
-process = {}
-process['table'] = []
-process['gantt'] = []
 
 
-if __name__ == '__main__':
-    n = raw_input('Enter the number of processess : ')
-    n = int(n)
+def sjf(data):
+    process = {}
+    process['table'] = data
+    process['gantt'] = []
+
     time = 0
-    left = n
+    left = len(data)
     flag = 0
     a_tat = 0.0
     a_wt = 0.0
-    for i in range(n):
-        temp = {}
-        temp['no'] = i+1
- #       gtemp['no'] = i+1
-        temp['at'] = int(input('Enter the arrival time of process %d : '%(i+1)))
-        temp['bt'] = int(input('Enter the burst time of process %d : '%(i+1)))
-        process['table'].append(temp)
-#        process['gantt'].append(gtemp)
     process['table'] = sorted(process['table'], key=itemgetter('bt'))
     while left!=0:
         flag = 0
@@ -32,7 +23,6 @@ if __name__ == '__main__':
                 gtemp['stop'] = time
                 process['gantt'].append(gtemp)
                 temp['bt'] = 0
-                print 'Process %d has completed at time %d.'%(temp['no'], time)
                 temp['ct'] = time
                 temp['tat'] = temp['ct'] - temp['at']
                 temp['wt'] = temp['tat'] - temp['bt']
@@ -42,4 +32,6 @@ if __name__ == '__main__':
                 flag =1
         if(flag==0):
             time += 1
-print process['gantt']
+    return process
+
+
