@@ -31,8 +31,12 @@ def gateway(request):
         data = json.loads(data)
         alg = request.POST.get('algo')
         alg=json.loads(alg)
-        print(alg)
+
         if(alg=="RR"):
             result = rr(data)
-        print(result)
+        elif(alg=="FCFS"):
+            result = fcfs(data)
+        elif(alg=="SRTF"):
+            result = srtf(data):
+
     return JsonResponse(result)
