@@ -46,6 +46,7 @@
   <script>
 
 var a;
+var seek;
 // 	var a = [
 // [20,-0],[50,-1],[100,-2],[10,-3],[5,-4]
 //   ];//Array of Array format : [order of access,Cylinder number]
@@ -80,24 +81,31 @@ var a;
   	      chart.draw(data, options);
   	    }
   $('#sender').click(function(){
-  var irequests = $("#req").val().split(" ");
+  var irequests = $("#req").val().trim().split(" ");
+  var i;
   console.log(irequests);
   var icyl = $("#cyl").val();
+  icyl = parseInt(icyl);
   console.log(icyl);
   var ialg = $("#sel1").val();
+  ialg = parseInt(ialg);
   console.log(ialg);
   var icur = $("#cur").val();
+  icur = parseInt(icur);
   console.log(icur);
   var iprev = $("#prev").val();
+  iprev = parseInt(iprev);
   console.log(iprev);
 
-  var data = {'cyl':icyl, 'current':icur, 'prev':iprev, 'requests':irequests, 'n':irequests.length};
+  var data = {'cyl':icyl, 'current':icur, 'prev':iprev, 'requests':irequests.map(Number), 'n':irequests.length};
   console.log(data);
 
   var text = JSON.stringify(data);
+  var ialg = JSON.stringify(ialg);
   //console.log(text);
-  $.post('/disk/gateway/',{value:text}, function(result){
-    a=result['output'];
+  $.post('/disk/gateway/',{value:text,algo:ialg}, function(result){
+    a=result['output']['sequence'];
+    seek = result['output']["displacement"];
     google.charts.load('current', {packages: ['corechart', 'line']});
   	google.charts.setOnLoadCallback(drawBackgroundColor);
   });

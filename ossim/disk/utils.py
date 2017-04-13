@@ -97,7 +97,7 @@ def cscan(data):
         #print "\nTotal moves=%d"%(sum)
     result={}
     result["sequence"] = [[sequence[i],-i] for i in range(len(sequence))]
-    result["displacement"] = seeksum
+    result["displacement"] = sum
     return result
 
 def clook(data):
