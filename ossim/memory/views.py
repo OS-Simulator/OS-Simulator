@@ -10,10 +10,15 @@ from . models import MemSchedAlg
 from . utils import fifo as ff
 from . utils import lru,opt
 
-def home(request):
+def page(request):
     algos = MemSchedAlg.objects.all()
     context = {'algos': algos}
-    return render(request, 'memory/index.html',context = context)
+    return render(request, 'memory/page_index.html',context = context)
+
+def alloc(request):
+    algos = MemSchedAlg.objects.all()
+    context = {'algos': algos}
+    return render(request, 'memory/alloc_index.html',context = context)
 
 def detail(request,pk):
     alg = get_object_or_404(MemSchedAlg, pk=pk)

@@ -1,0 +1,36 @@
+{% extends "ossim/base.html" %}
+
+{% block title %} <title> Memory Management </title> {% endblock %}
+
+
+
+
+{% block content %}
+<div class="main-container">
+  <div class="page-replacement">
+    <h2>Page Replacement Algorithms</h2>
+    {% for alg in algos %}
+      {% if alg.demourl|stringformat:"s" == "page"  %}
+        <div class="alg-container">
+          <div class="alg-name">  {{alg.name}} </div>
+          <div class="alg-description">
+            {{alg.description}}
+          </div>
+        </div>
+        <br>
+        {% endif %}
+      {% endfor %}
+        <!-- THIS IS COMMON DEMO BUTTON FOR ALL ABOVE ALGOS -->
+        <a href="/memory/demo/" class="btn btn-primary">Demo</a><br>
+
+  </div>
+
+
+
+
+
+
+
+
+</div>
+{% endblock %}
