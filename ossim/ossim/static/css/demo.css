@@ -23,17 +23,4 @@ body{
   text-align: right;
   margin-bottom: 1;
 }
-body{
-	padding: 10px;
-	text-align: left;
-}
-/*input */
-	.card {
-        border: 1px solid green;
-        padding: 10px;
-        margin-top: 10px;
-    }
-    [disabled]{
-        background-color: white;
-        border:0px black;
-    }
+

@@ -16,31 +16,32 @@
 </head>
 
 
-<body>
-  <h1 style="text-alig
-    var text = JSON.strn:center;">
-    Process Scheduling Demo:
-  </h1>
-  <br>
-  <br>
-  <div class="note">
-	<button id="sender" class="btn btn-primary">Send the entire data</button>
-  <!-- <button onclick="download()">Generate JSON</button> -->
-  </div>
+<body style="padding:10px;">
+  <div class="panel panel-primary">
+      <div class="panel-heading"><h1 style="text-alig
+        var text = JSON.strn:center;">
+        Process Scheduling
+      </h1></div>
+  <div class="panel-body">
+
     <div id="output">
     </div>
 
-    <div class="card">
-        Enter arrival time:
-        <input style="width:200px;"id="newarrivaltime" class="form-control" type="text" value=""></input>
-         Enter burst time:
-        <input style="width:200px;position:relative;" id="newbursttime" class="form-control" type="text" value=""></input>
-        <button class="btn" onclick="addToList()">Add</button>
+    <div class="card" style="height:70px;">
+        <div style="width:250px;float:left;text-align:left;">
+          Enter arrival time:
+          <input style="width:200px;"id="newarrivaltime" class="form-control" type="text" value=""></input>
+        </div>
+        <div style="width:300px;float:left;text-align:left;">
+          Enter burst time:
+          <input style="width:200px;float:left;" id="newbursttime" class="form-control" type="text" value=""></input>
+          <button class="btn btn-success" onclick="addToList()" style="float:left;margin-left:10px;">Add</button>
+        </div>
     </div>
-  <br>
-  <br>
 
-  <label for="sel1">Select Algorithm to be used :</label>
+    <div style="float:left;">
+  <label for="sel1" style="float:left;">Select Algorithm to be used :</label>
+  <br>
       <select class="form-control" id="sel1" style="width:400px;">
         <option>First come first serve(FCFS)</option>
         <option>Shortest job first(SJF)</option>
@@ -48,6 +49,13 @@
         <option>Shortest run time first(SRTF)</option>
 
       </select>
+    </div>
+  </div>
+
+    <div class="panel-footer" style="height:50px;">
+    	<button style="float:right;" id="sender" class="btn btn-primary">Send the entire data</button>
+    </div>
+  </div>
 
   <br>
   <br>
