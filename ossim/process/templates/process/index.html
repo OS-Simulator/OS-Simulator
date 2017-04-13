@@ -1,6 +1,31 @@
+{% extends "ossim/base.html" %}
+
+{% block title %} <title> Process Scheduling </title> {% endblock %}
+
+
+
+
+{% block content %}
+<div class="main-container">
 {% for alg in algos %}
-    <a href="{% url 'process:detail' alg.id %}">
-      {{alg.name}}
-    </a>
+    <div class="alg-container">
+      <div class="alg-name">  {{alg.name}} </div>
+      <div class="alg-description">
+        {{alg.description}}
+      </div>
+    </div>
     <br>
 {% endfor %}
+<!-- THIS IS COMMON DEMO BUTTON FOR ALL ABOVE ALGOS -->
+<a href="/process/demo/1/" class="btn btn-primary">Demo</a><br>
+<hr>
+<div class="alg-container">
+  <div class="alg-name">  Priority Scheduling (Pre-emptive) </div>
+  <div class="alg-description">
+  This is short description for Pre-Emptive Priority Scheduling
+  </div>
+  <a href="/process/demo/2/" class="btn btn-primary">Demo</a><br>
+</div>
+
+</div>
+{% endblock %}

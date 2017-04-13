@@ -21,7 +21,7 @@ def detail(request,pk):
                }
     return render(request,'memory/detail.html',context=context)
 
-def demo(request,pk):
+def demo(request):
     return render(request,'memory/page.html')
 
 @csrf_exempt

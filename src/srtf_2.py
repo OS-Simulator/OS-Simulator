@@ -1,7 +1,6 @@
 from operator import itemgetter
 
-
-def prepri(data):
+def srtf(data):
     process = {}
     process['table'] = data
     process['gantt'] = []
@@ -9,17 +8,17 @@ def prepri(data):
     n = len(data)
     time = 0
     left = n
+
     process['table'] = sorted(process['table'], key=itemgetter('at'))
     x = process['table']
     time = x[0]['at']
-    proc = 0  # current process
+    proc = 0  #current process
 
     for i in range(n):
         x[i]['rem'] = x[i]['bt']
-    temp = {}
+    temp={}
     temp['start'] = time
     temp['no'] = 0
-
     while left != 0:
         if proc != -1:
             time += 1
@@ -45,7 +44,7 @@ def prepri(data):
                     break
             if min!=-1:
                 for i in range(n):
-                    if x[min]['pri'] > x[i]['pri'] and x[i]['rem'] != 0 and x[i]['at'] <= time:
+                    if x[min]['rem'] > x[i]['rem'] and x[i]['rem'] != 0 and x[i]['at'] <= time:
                         min = i
                 if proc != min and flag == 0:
                     temp['no'] = proc + 1
@@ -70,7 +69,7 @@ def prepri(data):
                     break
             if min!=-1:
                 for i in range(n):
-                    if x[min]['pri'] > x[i]['pri'] and x[i]['rem'] != 0 and x[i]['at'] <= time:
+                    if x[min]['rem'] > x[i]['rem'] and x[i]['rem'] != 0 and x[i]['at'] <= time:
                         min = i
                 if proc != min:
                     temp['stop'] = time
@@ -84,8 +83,6 @@ def prepri(data):
                 proc = -1
 
     return process
-
-
 
 
 

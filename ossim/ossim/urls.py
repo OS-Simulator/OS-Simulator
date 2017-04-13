@@ -21,9 +21,10 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^job/', include('job.urls')),
     url(r'^disk/', include('disk.urls')),
+    url(r'^synchro/', include('synchro.urls')),
     url(r'^process/', include('process.urls')),
     url(r'^memory/', include('memory.urls')),
-    url(r'^synchro/', include('synchro.urls')),
+
 
 
 ]

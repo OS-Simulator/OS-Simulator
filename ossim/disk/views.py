@@ -20,7 +20,7 @@ def detail(request,pk):
                }
     return render(request,'disk/detail.html',context=context)
 
-def demo(request,pk):
+def demo(request):
     return render(request,'disk/disk.html')
 
 @csrf_exempt

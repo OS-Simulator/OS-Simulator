@@ -1,9 +1,31 @@
-<html>
-  <head>
-    <title>OS-SIM</title>
+{% extends "ossim/base.html" %}
 
-  </head>
-  <body>
-    Test Index
-  </body>
-</html>
+{% block title %}
+<title> OS-SIM </title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="short">
+    This is a short description of OS-SIM spanning entire Width
+  </div>
+  <div class="explore">
+    <a href="/process/" class="btn btn-primary">Process Sceduling</a><br>
+    <a href="/memory/" class="btn btn-primary">Memory Management</a><br>
+    <a href="/disk/" class="btn btn-primary">Disk Sceduling</a><br>
+    <a href="/synchro/" class="btn btn-primary">Synchronisation</a><br>
+    <a href="/files/" class="btn btn-primary">File Structure</a><br>
+  </div>
+
+
+</div>
+
+{% endblock %}
+
+{% block style %}
+<style>
+
+</style>
+
+{% endblock %}

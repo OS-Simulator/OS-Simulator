@@ -7,7 +7,7 @@ from django.http import JsonResponse
 
 # Create your views here.
 from . models import ProcessSchedAlg
-from . utils import rr
+from . utils import rr,sjf,srtf,fcfs,prepri
 
 def home(request):
     algos = ProcessSchedAlg.objects.all()
@@ -21,7 +21,10 @@ def detail(request,pk):
     return render(request,'process/detail.html',context=context)
 
 def demo(request,pk):
-    return render(request,'process/process.html')
+    if(pk=='1'):
+        return render(request,'process/process.html')
+    elif(pk=='2'):
+        return render(request,'process/priority.html')
 
 @csrf_exempt
 def gateway(request):
@@ -37,6 +40,10 @@ def gateway(request):
         elif(alg=="FCFS"):
             result = fcfs(data)
         elif(alg=="SRTF"):
-            result = srtf(data):
+            result = srtf(data)
+        elif(alg=="SJF"):
+            result = sjf(data)
+        elif(alg=="PRIO"):
+            result = prepri(data)
 
     return JsonResponse(result)
