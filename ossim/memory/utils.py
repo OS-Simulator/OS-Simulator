@@ -97,7 +97,7 @@ def lru(data):
 
 	output["hits"] = hit
 	output["miss"] = n - hit
-	output["hit-ratio"] = float(hit)/n;
+	output["hit-ratio"] = round(float(hit)/n,2);
 
 	return output
 
@@ -159,7 +159,7 @@ def opt(data):
 
 	output["hits"] = hit
 	output["miss"] = n - hit
-	output["hit-ratio"] = float(hit)/n;
+	output["hit-ratio"] = round(float(hit)/n,2);
 
 	return output
 
