@@ -312,3 +312,44 @@ def prepri(data):
                 proc = -1
 
     return process
+
+
+def priority(data):
+    process = {}
+    process['table'] = data
+    process['gantt'] = []
+
+    time = 0
+    left = len(data)
+    flag = 0
+    a_tat = 0.0
+    a_wt = 0.0
+    process['table'] = sorted(process['table'], key=itemgetter('pri'))
+    tbt = []
+    for bt in process['table']:
+        tbt.append(bt['bt'])
+    while left!=0:
+        flag = 0
+        for temp in process['table']:
+            if(temp['at']<=time and temp['bt']!=0):
+                gtemp = {}
+                gtemp['no'] = temp['no']
+                gtemp['start'] = time
+                time += temp['bt']
+                gtemp['stop'] = time
+                process['gantt'].append(gtemp)
+                temp['bt'] = 0
+                temp['ct'] = time
+                temp['tat'] = temp['ct'] - temp['at']
+                temp['wt'] = temp['tat'] - temp['bt']
+                a_tat += temp['tat']
+                a_wt += temp['wt']
+                left -= 1
+                flag =1
+        if(flag==0):
+            process['gantt'].append({'no' : -1, 'start' : time, 'stop' : time+1})
+            time += 1
+
+    for i, bt in enumerate(tbt):
+        process['table'][i]['bt'] = bt
+    return process
