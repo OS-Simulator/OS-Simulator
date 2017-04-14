@@ -29,8 +29,8 @@ function displayBlock(i){
     return;
   }
 
-  if(sequence[i].no == -1) $("#comments").append("<br>CPU is idle<br>");
-  else $("#comments").append("<br>Process "+sequence[i].no+" entered CPU at "+sequence[i].start+" and is being executed<br>");
+  if(sequence[i].no == -1) $("#comments").append("<br>t = "+sequence[i].start+"CPU is idle<br>");
+  else $("#comments").append("<br>t = "+sequence[i].start+" : Process "+sequence[i].no+" entered CPU"+" and is being executed<br>");
   var blockWidth = (sequence[i].stop - sequence[i].start)*pixel;
   var processName = sequence[i].no;
   if(sequence[i].no == -1) $('#outer-div').append('<div class="block" id="process-'+sequence[i].start +'">CPU IDLE' +'<div class="bottom">'+ sequence[i].stop +'</div></div>');
