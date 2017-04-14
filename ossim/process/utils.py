@@ -64,8 +64,8 @@ def rr(data):
         elif a:
             Q.put(temp)
 
-        for i, bt in enumerate(tbt):
-            process['table'][i]['bt'] = bt
+    for i, bt in enumerate(tbt):
+        process['table'][i]['bt'] = bt
     return process
 
 def srtf(data):
