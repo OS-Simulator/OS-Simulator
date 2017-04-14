@@ -15,6 +15,11 @@ def rr(data):
     a_wt = 0.0
     tq = 2
     process['table'] = sorted(process['table'], key=itemgetter('at'))
+    tbt = []
+    for bt in process['table']:
+        tbt.append(bt['bt'])
+    if process['table'][0]['at'] != 0:
+        process['gantt'].append({'no' : -1, 'start' : 0, 'stop' : process['table'][0]['at']})
     time = process['table'][0]['at']
     for x in process['table']:
         if x['at']==time:
@@ -58,6 +63,9 @@ def rr(data):
 
         elif a:
             Q.put(temp)
+
+    for i, bt in enumerate(tbt):
+        process['table'][i]['bt'] = bt
     return process
 
 def srtf(data):
