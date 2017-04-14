@@ -45,5 +45,5 @@ def gateway(request):
             result = sjf(data)
         elif(alg=="PRIO"):
             result = prepri(data)
-
+        print(result)
     return JsonResponse(result)

@@ -74,6 +74,8 @@ def srtf(data):
     time = x[0]['at']
     proc = 0  #current process
 
+    for i in range(n):
+        x[i]['rem'] = x[i]['bt']
     temp={}
     temp['start'] = time
     temp['no'] = 0
@@ -142,6 +144,7 @@ def srtf(data):
 
     return process
 
+
 def fcfs(data):
     process = {}
     process['table'] = data
@@ -168,9 +171,12 @@ def fcfs(data):
             time = x[i]['at']
             temp['start'] = time
         time += x[i]['bt']
+        x[i]['ct'] = time
+        x[i]['tat'] = time - x[i]['at']
+        x[i]['wt'] = x[i]['tat'] - x[i]['bt']
         temp['stop'] = time
         process['gantt'].append(temp)
-
+    process['table'] = x
     return process
 
 

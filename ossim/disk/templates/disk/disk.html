@@ -86,6 +86,7 @@ var seek;
 
   	      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
   	      chart.draw(data, options);
+          document.getElementById("result").innerHTML = "Seek-Time : " + seek;
   	    }
   $('#sender').click(function(){
   var irequests = $("#req").val().trim().split(" ");
@@ -94,9 +95,7 @@ var seek;
   var icyl = $("#cyl").val();
   icyl = parseInt(icyl);
   console.log(icyl);
-  var ialg = $("#sel1").val();
-  ialg = parseInt(ialg);
-  console.log(ialg);
+
   var icur = $("#cur").val();
   icur = parseInt(icur);
   console.log(icur);
@@ -108,14 +107,14 @@ var seek;
   console.log(data);
 
   var text = JSON.stringify(data);
-  var ialg = JSON.stringify(ialg);
+  var ialg = JSON.stringify($("#sel1").val());
   //console.log(text);
   $.post('/disk/gateway/',{value:text,algo:ialg}, function(result){
     a=result['output']['sequence'];
     seek = result['output']["displacement"];
     google.charts.load('current', {packages: ['corechart', 'line']});
   	google.charts.setOnLoadCallback(drawBackgroundColor);
-    document.getElementById("result").innerHTML = "Seek-Time : " + seek;
+
   });
 
 });

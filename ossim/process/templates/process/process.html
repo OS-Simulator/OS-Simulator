@@ -80,6 +80,7 @@
   </div>
   	<div class="panel-content">
 	<table id="ptable" class="table table-hover">
+  <th>PNO.</th>
 	<th>Arrival time</th>
 	<th>Burst time</th>
 	<th>completion time</th>
@@ -93,10 +94,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-
     $('#sender').click(function(){
-
-
     var text = JSON.stringify(stuff);
     var alg = JSON.stringify($("#sel1").val().split("(")[1].split(")")[0])
     //console.log(text);
@@ -106,15 +104,13 @@
       total = sequence.length;
       pixel = 0;
       i = 0;
+      $('#outer-div,#comments,#ptable').empty();
+      $('#ptable').append('<th>PNO.</th> <th>Arrival time</th>  <th>Burst time</th>  <th>completion time</th>  <th>waiting time</th>  <th>turn-around time</th>');
       totalTime = sequence[total-1].stop;
       pixel = parseInt(800/totalTime);
       containerWidth = pixel*totalTime + 2;
       $('#outer-div').css('width',containerWidth+'px');
       displayBlock(i);
     });
-
-
     });
-
-
 </script>
