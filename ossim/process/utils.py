@@ -165,6 +165,8 @@ def fcfs(data):
     average_wt = 0
 
     process['table'] = sorted(process['table'], key=itemgetter('at'))
+    if process['table'][0]['at'] != 0:
+        process['gantt'].append({'no' : -1, 'start' : 0, 'stop' : process['table'][0]['at']})
     x = process['table']
     time = x[0]['at']
     proc = 0  #current process
@@ -187,7 +189,6 @@ def fcfs(data):
     process['table'] = x
     return process
 
-
 def sjf(data):
     process = {}
     process['table'] = data
@@ -199,6 +200,9 @@ def sjf(data):
     a_tat = 0.0
     a_wt = 0.0
     process['table'] = sorted(process['table'], key=itemgetter('bt'))
+    tbt = []
+    for bt in process['table']:
+        tbt.append(bt['bt'])
     while left!=0:
         flag = 0
         for temp in process['table']:
@@ -218,7 +222,11 @@ def sjf(data):
                 left -= 1
                 flag =1
         if(flag==0):
+            process['gantt'].append({'no' : -1, 'start' : time, 'stop' : time+1})
             time += 1
+
+    for i, bt in enumerate(tbt):
+        process['table'][i]['bt'] = bt
     return process
 
 def prepri(data):
