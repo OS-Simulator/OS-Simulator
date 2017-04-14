@@ -83,9 +83,9 @@
   <th>PNO.</th>
 	<th>Arrival time</th>
 	<th>Burst time</th>
-	<th>completion time</th>
-	<th>waiting time</th>
-	<th>turn-around time</th>
+	<th>Completion time</th>
+	<th>Waiting time</th>
+	<th>Turn-around time</th>
 	</table>
   	</div>
   	</div>
@@ -105,7 +105,7 @@
       pixel = 0;
       i = 0;
       $('#outer-div,#comments,#ptable').empty();
-      $('#ptable').append('<th>PNO.</th> <th>Arrival time</th>  <th>Burst time</th>  <th>completion time</th>  <th>waiting time</th>  <th>turn-around time</th>');
+      $('#ptable').append('<th>PNO.</th> <th>Arrival time</th>  <th>Burst time</th>  <th>Completion time</th>  <th>Waiting time</th>  <th>Turn-around time</th>');
       totalTime = sequence[total-1].stop;
       pixel = parseInt(800/totalTime);
       containerWidth = pixel*totalTime + 2;
