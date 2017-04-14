@@ -56,26 +56,38 @@
     	<button style="float:right;" id="sender" class="btn btn-primary">Send the entire data</button>
     </div>
   </div>
-
-  <br>
-  <br>
-  <div id="outer-div">
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h3>
+      Gantt chart
+    </h3>
+    </div>
+    <br><br>
+    <div id="outer-div">
   </div>
-  <br><br><br>
-  <div id="comments">
-  	<h1>Operations Taking Place</h1><br><br>
+    <br><br>
+</div>
+  <div class="panel panel-warning" style="width:50%;float:left;">
+  <div class="panel-heading">
+  	<h3>Operations Taking Place</h3>
   </div>
-  <br><br><br>
-  <div>
-  	<h1>Table</h1><br><br>
+  <div id="comments" class="panel-content">
+  </div>
+</div>
+  <div class="panel panel-warning" style="width:50%;float:left;">
+  <div class="panel-heading">
+  	<h3>Table</h3>
+  </div>
+  	<div class="panel-content">
 	<table id="ptable" class="table table-hover">
 	<th>Arrival time</th>
 	<th>Burst time</th>
 	<th>completion time</th>
 	<th>waiting time</th>
 	<th>turn-around time</th>
-
-  </div>
+	</table>
+  	</div>
+  	</div>
 </body>
 </html>
 
