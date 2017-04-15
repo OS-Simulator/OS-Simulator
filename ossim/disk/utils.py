@@ -337,3 +337,20 @@ def sstf(inputDict):
 
 	result["displacement"] = displacement
 	return result
+
+
+def fcfs(inputDict):
+    r = []
+    r = inputDict["requests"]
+    curr = inputDict["current"]
+    prev = inputDict["prev"]
+    result = {}
+    result['displacement'] = 0
+
+    for req in r:
+        result['displacement'] += abs(curr-req)
+        curr = req
+
+    result['sequence'] = r
+
+    return result
