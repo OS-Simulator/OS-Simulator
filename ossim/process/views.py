@@ -25,6 +25,8 @@ def demo(request,pk):
         return render(request,'process/process.html')
     elif(pk=='2'):
         return render(request,'process/priority.html')
+    elif(pk=='3'):
+        return render(request,'process/multiLevel.html')
 
 @csrf_exempt
 def gateway(request):

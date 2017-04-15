@@ -28,7 +28,7 @@ function drawTable(i){
 
 function displayBlock(i){
   if(i == total){
-    $('#gantth').append('Avg WT: '+(avgwt/a.length).toFixed(2)+' Avg TAT: '+(avgtat/a.length).toFixed(2));
+    $('#gantth').append('<h2>AVG WT: '+(avgwt/a.length).toFixed(2)+' AVG TAT: '+(avgtat/a.length).toFixed(2)+'</h2>');
     //drawTable();
     return;
   }
