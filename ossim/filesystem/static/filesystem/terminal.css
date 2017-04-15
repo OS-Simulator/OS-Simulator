@@ -1,0 +1,16 @@
+#console {
+    background-color: #000;
+    font-family: courier, monospace;
+    color: #fff;
+    width:750px;
+    font-size:14px;
+}
+#a {
+    color: #0f0;
+}
+#c {
+    color: #0bc;
+}
+#b {
+    color: #ff0096;
+}

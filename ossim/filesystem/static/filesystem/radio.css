@@ -1,0 +1,65 @@
+html, body { height: 100%; padding: 0; margin: 0; }
+
+div.radio-button {
+	clear: right;
+	margin: 0 50px;
+    float : left;
+}
+label {
+  width: 200px;
+  border-radius: 3px;
+  border: 1px solid #D1D3D4;
+}
+
+input[type="radio"]:empty {
+	margin-left: -100000px;
+}
+
+ /*style label */
+input[type="radio"]:empty ~ label {
+	position: relative;
+	float: left;
+	line-height: 2.5em;
+	text-indent: 3.25em;
+	margin-top: 2em;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+input[type="radio"]:checked ~ label{
+	background: #444c75;
+	color : white;
+}
+
+input[type="radio"]:empty ~ label:before {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	content: '';
+	width: 2.5em;
+	background: #D1D3D4;
+	border-radius: 3px 0 0 3px;
+}
+
+/* toggle hover */
+input[type="radio"]:hover:not(:checked) ~ label:before {
+	content:'\25CF';
+	text-indent: .9em;
+	color: #C2C2C2;
+}
+
+input[type="radio"]:hover:not(:checked) ~ label {
+	color: #888;
+}
+
+/* toggle on */
+input[type="radio"]:checked ~ label:before {
+	text-indent: .9em;
+	color: #9ca8e2;
+	background-color: black;
+}

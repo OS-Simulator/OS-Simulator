@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'disk',
     'ossim',
     'mat',
+    'filesystem',
 ]
 
 MIDDLEWARE = [

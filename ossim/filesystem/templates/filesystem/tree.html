@@ -1,0 +1,202 @@
+<head>
+    <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+    <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'filesystem/radio.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{%static 'filesystem/terminal.css' %}" type="text/css" />
+</head>
+
+<body>
+    <div class = "panel panel-primary"
+        style="margin : 0.25cm 0.25cm 0.25cm 0.25cm;">
+        <div class="panel-heading">
+            <h2>Tree Structured Directory</h2>
+        </div>
+        <ul class="breadcrumb"></ul>
+        <div class="panel-body">
+            <form action = "process" method="post" id="mainform">
+                {% csrf_token %}
+            </form>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary btn-success" name="command"
+                value="touch">Add File</button>
+            <button class="btn btn-primary btn-success" name="command"
+                value="mkdir">Create Directory</button>
+            <button class="btn btn-primary btn-danger" name="command"
+                value="rm">Remove File</button>
+            <button class="btn btn-primary btn-danger" name="command"
+                value="rmdir">Remove Directory</button>
+            <button class="btn btn-primary btn-warning" name="command"
+                value="cd">Change Directory</button>
+        </div>
+    </div>
+    <div class="panel panel-default"
+        style="margin : 0.25cm 0.25cm 0.25cm 0.25cm;">
+        <div class="panel-heading">
+            <h4>Terminal</h4>
+        </div>
+        <div class="panel-body" style="background-color:#000;">
+            <div id="console">
+                <span id="a">OS-Simulator/filesystem</span>:<span id="b">~</span><span id="c">$</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script>
+        curpath = []
+        curlist = []
+        curflag = 0
+        var showText = function (target, message, index, interval, callback) {
+            if (index < message.length) {
+                $(target).append(message[index++]);
+                setTimeout(function () { showText(target, message, index, interval, callback); }, interval);
+            }
+            else{
+                callback();
+            }
+        }
+        function refresh(path, filelis){
+            curpath = path;
+            curlist = filelis;
+            $(".breadcrumb").empty();
+            $("#mainform").empty();
+            for(var i=0; i<path.length-1; i++){
+                $(".breadcrumb").append('<li><a onclick="cdfunc(this)" pathid="'+i+'">'+path[i]+'</a></li>');
+            }
+            if(path.length > 0){
+                $(".breadcrumb").append('<li class="active">'+path[path.length-1]+'</li>');
+            }
+
+            if(filelis.length > 0){
+                $("#mainform").append('<div class = "radio-button">'+
+                    '<input type="radio" name="fname" value="'+filelis[0]+'" id = "'+filelis[0]+'" checked="checked"/>'+
+                    '<label for="'+filelis[0]+'">'+filelis[0]+'</label></div>');
+            }
+            for(var i=1; i<filelis.length; i++){
+                $("#mainform").append('<div class = "radio-button">'+
+                    '<input type="radio" name="fname" value="'+filelis[i]+'" id = "'+filelis[i]+'" />'+
+                    '<label for="'+filelis[i]+'">'+filelis[i]+'</label></div>');
+            }
+        }
+        $(function(){
+            dict = {{dictionary | safe}};
+            filelis = dict.filelis;
+            path = dict.path;
+            curpath = path;
+            curlist = filelis;
+            for(var i=0; i<path.length-1; i++){
+                $(".breadcrumb").append('<li><a onclick="cdfunc(this)" pathid="'+i+'">'+path[i]+'</a></li>');
+            }
+            if(path.length>0){
+                $(".breadcrumb").append('<li class="active">'+path[path.length-1]+'</a></li>');
+            }
+
+            if(filelis.length>0){
+                $("#mainform").append('<div class = "radio-button">'+
+                    '<input type="radio" name="fname" value="'+filelis[0]+'" id = "'+filelis[0]+'" checked="checked"/>'+
+                    '<label for="'+filelis[0]+'">'+filelis[0]+'</label></div>');
+            }
+            for(var i=1; i<filelis.length; i++){
+                $("#mainform").append('<div class = "radio-button">'+
+                    '<input type="radio" name="fname" value="'+filelis[i]+'" id = "'+filelis[i]+'" />'+
+                    '<label for="'+filelis[i]+'">'+filelis[i]+'</label></div>');
+            }
+        });
+        function cdfunc(ele){
+            pathid = parseInt(ele.getAttribute('pathid'));
+            curpath = curpath.slice(0, pathid + 1);
+            $.post('process', {path : curpath, command : 'cd'}, function(data){
+                refresh(data.dictionary.path, data.dictionary.filelis);
+            });
+            fname = ''
+            for(i=0; i<curpath.length; i++){
+                fname += curpath[i]+'/';
+            }
+            showText("#console", "cd '" + fname + "'", 0, 100, function(){
+                $("#console").append('<br /><span id="a">OS-Simulator/filesystem</span>:<span id="b">~</span>'
+                + '<span id="c">$</span> ');
+            });
+        }
+        $("button[name='command']").click(function(){
+            command = this.value;
+            if(command === 'mkdir'){
+                fname = prompt('Enter Folder name');
+                if(fname!=null){
+                    curpath.push(fname);
+                    $.post('process', {path : curpath, command : command}, function(data){
+                        if(data.dictionary.flag==0){
+                            refresh(data.dictionary.path, data.dictionary.filelis);
+                            showText("#console", "mkdir '" + fname + "'", 0, 100, function(){
+                                $("#console").append('<br /><span id="a">OS-Simulator/filesystem</span>:<span id="b">~</span>'
+                                + '<span id="c">$</span> ');
+                            });
+                        }
+                        else {
+                            refresh(data.dictionary.path, data.dictionary.filelis);
+                            alert('Name collision!');
+
+                        }
+                    });
+                }
+            }
+            else if(command === 'touch'){
+                fname = prompt('Enter File name');
+                if(fname!=null){
+                    curpath.push(fname + '.txt');
+                    $.post('process', {path : curpath, command : command}, function(data){
+                        if(data.dictionary.flag==0){
+                            refresh(data.dictionary.path, data.dictionary.filelis);
+                            showText("#console", "touch '" + fname + '.txt' + "'", 0, 100, function(){
+                                $("#console").append('<br /><span id="a">OS-Simulator/filesystem</span>:<span id="b">~</span>'
+                                + '<span id="c">$</span> ');
+                            });
+                        }
+                        else{
+                            refresh(data.dictionary.path, data.dictionary.filelis);
+                            alert('Name collision!');
+                        }
+                    });
+                }
+            }
+            else if(command === 'rm' || command === 'rmdir' || command === 'cd'){
+                elem = document.querySelector('input[name="fname"]:checked')
+                if(elem==null){
+                    alert('Please select a File/Folder');
+                }
+                else{
+                    fname = document.querySelector('input[name="fname"]:checked').value;
+                    if(command === 'rmdir' && fname.endsWith(".txt"))
+                        alert('Please choose a directory, not a file.')
+                    else if(command === 'cd' && fname.endsWith(".txt"))
+                        alert('Please choose a directory, not a file.')
+                    else if(command === 'rm' && !fname.endsWith(".txt"))
+                        alert('Please choose a file, not a directory.')
+                    else{
+                        curpath.push(fname);
+                        $.post('process', {path : curpath, command : command}, function(data){
+                            refresh(data.dictionary.path, data.dictionary.filelis);
+                        });
+                        if(command === 'rmdir'){
+                            command = 'rm -r'
+                        }
+                        showText("#console", command + " '" + fname + "'", 0, 100, function(){
+                            $("#console").append('<br /><span id="a">OS-Simulator/filesystem</span>:<span id="b">~</span>'
+                            + '<span id="c">$</span> ');
+                        });
+                    }
+                }
+            }
+        });
+    </script>
+</body>
