@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 
 <head>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <div class="container-fluid">
     <center><h1>Simulation of the Dining Philosopher's semaphore</h1></center>
     <button type ="button", class = "btn btn-primary", onclick ="initiate()", style="height:150px;width:250px;position:absolute;top:20%;left:5%;font-size:25px"  >Next!</button>
@@ -16,7 +16,7 @@
     <button type = "button", id ="num", name = "num", class = "btn btn-primary", style="height:70px;width:300px;position:absolute;top:25%;left:75%;font-size:17px">Random number generated: </button>
 
     <button type = "button", id ="table", name = "table", style="height:435px;width:435px;position:absolute;top:23%;left:35%;border-radius:435px;border:1px solid #000;background-color:#CD853F"> </button>
-    <img src="food.png" alt="Mountain View" style="position:absolute;left:41%;top:37%;width:250px;height:250px;">
+    <img src="{% static 'img/food.png' %}" alt="Mountain View" style="position:absolute;left:41%;top:37%;width:250px;height:250px;">
 
     <button type = "button", id ="one", name = "one", style="height:125px;width:125px;position:absolute;top:12%;left:45%;border-radius:125px;border:1px solid #000"> P1 </button>
     <button type = "button", id ="five", name = "one", style="height:125px;width:125px;position:absolute;top:35%;left:30%;border-radius:125px;border:1px solid #000"> P5 </button>

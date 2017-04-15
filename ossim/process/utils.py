@@ -84,15 +84,13 @@ def srtf(data):
         temp = {}
         temp['start'] = 0
         temp['no'] = -1
-        temp['stop'] = time
-        process['gantt'].append(temp)
+        temp['end'] = time
     proc = 0  #current process
-
     for i in range(n):
         x[i]['rem'] = x[i]['bt']
     temp={}
     temp['start'] = time
-    temp['no'] = 0
+    temp['no'] = x[0]['no']
     while left != 0:
         if proc != -1:
             time += 1
@@ -103,9 +101,9 @@ def srtf(data):
                 x[proc]['ct'] = time
                 x[proc]['tat'] = time - x[proc]['at']
                 x[proc]['wt'] = x[proc]['tat'] - x[proc]['bt']
-
+                #print 'Process %d has completed at time %d' % (proc + 1 , time)
                 left -= 1
-                temp['no'] = proc + 1
+                temp['no'] = x[proc]['no']
                 process['gantt'].append(temp)
                 temp = {}
                 temp['start'] = time
@@ -121,11 +119,11 @@ def srtf(data):
                     if x[min]['rem'] > x[i]['rem'] and x[i]['rem'] != 0 and x[i]['at'] <= time:
                         min = i
                 if proc != min and flag == 0:
-                    temp['no'] = proc + 1
+                    temp['no'] = x[proc]['no']
                     process['gantt'].append(temp)
                     temp = {}
                     temp['start'] = time
-                    temp['no'] = min
+                    temp['no'] = x[min]['no']
                     proc = min
                 elif flag == 1:
                     proc = min
@@ -151,13 +149,12 @@ def srtf(data):
                     process['gantt'].append(temp)
                     temp = {}
                     temp['start'] = time
-                    temp['no'] = min
+                    temp['no'] = x[min]['no']
                     proc = min
             else:
                 proc = -1
 
     return process
-
 
 def fcfs(data):
     process = {}
@@ -262,7 +259,15 @@ def prepri(data):
         temp['stop'] = time
         process['gantt'].append(temp)
     proc = 0  # current process
-
+    count = 0
+    while x[count]['at'] == time:
+    	count = count + 1
+    for i in range(count):
+    	for j in range(count - i - 1):
+    		if x[j]['pri'] > x[j+1]['pri']:
+    			temp = x[j]
+    			x[j] = x[j+1]
+    			x[j+1] = temp
     for i in range(n):
         x[i]['rem'] = x[i]['bt']
     temp = {}
@@ -281,7 +286,7 @@ def prepri(data):
                 x[proc]['wt'] = x[proc]['tat'] - x[proc]['bt']
                 #print 'Process %d has completed at time %d' % (proc + 1 , time)
                 left -= 1
-                temp['no'] = proc + 1
+                temp['no'] = x[proc]['no']
                 process['gantt'].append(temp)
                 temp = {}
                 temp['start'] = time
@@ -297,7 +302,7 @@ def prepri(data):
                     if x[min]['pri'] > x[i]['pri'] and x[i]['rem'] != 0 and x[i]['at'] <= time:
                         min = i
                 if proc != min and flag == 0:
-                    temp['no'] = proc + 1
+                    temp['no'] = x[proc]['no']
                     process['gantt'].append(temp)
                     temp = {}
                     temp['start'] = time
@@ -323,7 +328,7 @@ def prepri(data):
                         min = i
                 if proc != min:
                     temp['stop'] = time
-                    temp['no'] = min + 1
+                    temp['no'] = -1
                     process['gantt'].append(temp)
                     temp = {}
                     temp['start'] = time

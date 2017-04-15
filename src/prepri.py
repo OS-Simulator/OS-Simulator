@@ -31,7 +31,7 @@ def prepri(data):
     			x[j] = x[j+1]
     			x[j+1] = temp
 
-    
+
     temp = {}
     temp['start'] = time
     temp['no'] = 0
@@ -46,7 +46,7 @@ def prepri(data):
                 x[proc]['ct'] = time
                 x[proc]['tat'] = time - x[proc]['at']
                 x[proc]['wt'] = x[proc]['tat'] - x[proc]['bt']
-                print 'Process %d has completed at time %d' % (proc + 1 , time)
+                #print 'Process %d has completed at time %d' % (proc + 1 , time)
                 left -= 1
                 temp['no'] = proc + 1
                 process['gantt'].append(temp)
@@ -100,16 +100,3 @@ def prepri(data):
                 proc = -1
 
     return process
-
-
-
-
-
-
-
-
-
-
-
-
-

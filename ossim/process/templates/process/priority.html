@@ -64,6 +64,7 @@
       Gantt chart
     </h3>
     </div>
+      <div id="gantth"></div>
     <br><br>
     <div id="outer-div">
   </div>
@@ -119,7 +120,7 @@
       total = sequence.length;
       pixel = 0;
       i = 0;
-      $('#outer-div,#comments,#ptable').empty();
+      $('#outer-div,#comments,#ptable,#gantth').empty();
       // $('#thead').append('<th>PNO.</th> <th>Arrival time</th>  <th>Burst time</th>  <th>Completion time</th>  <th>Waiting time</th>  <th>Turn-around time</th>');
       totalTime = sequence[total-1].stop;
       pixel = parseInt(800/totalTime);

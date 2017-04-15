@@ -13,18 +13,26 @@
 <style>
 
 </style>
-<body>
-  <h1>
-    Page replacement
-  </h1>
+<body style="padding:10px;">
+  <div class="panel panel-primary">
+      <div class="panel-heading"><h1 style="text-alig
+        var text = JSON.strn:center;">
+        Page Replacement Algorithms
+      </h1></div>
   <br>
+  <div class="panel-body">
   <div id="input">
     <h4>Requests:</h4>
      <input type="text" class="requests form-control" placeholder="Enter requests"></input>
      <h4>Cache Size:</h4>
       <input type="text" class="size form-control" id="csize" placeholder="Enter cache size"></input>
-      <button id="submit" class="btn btn-primary">Submit</button>
+    </div>
+
   </div>
+  <div class="panel-footer" style="height:50px;">
+    <button style="float:right;" id="submit" class="btn btn-primary">Submit</button>
+  </div>
+</div>
   <div>
 
   </div>
@@ -41,21 +49,21 @@
       <button class="proceed hidden btn btn-primary" id="proceed1">Proceed</button><br><br>
       <div id="fifo">
 
-      </div><br><br>
+      </div>
       <div class="answer" id="answers1"></div>
     </div>
     <div id="2" class="tab-pane fade">
       <h1>LEAST RECENTLY USED</h1>
       <button class="proceed hidden btn btn-primary" id="proceed2">Proceed</button><br><br>
       <div id="lru">
-      </div><br><br>
+      </div>
       <div class="answer" id="answers2"></div>
     </div>
     <div id="3" class="tab-pane fade">
       <h1>OPTIMUM</h1>
       <button class="proceed hidden btn btn-primary" id="proceed3">Proceed</button><br><br>
       <div id="opt">
-      </div><br><br>
+      </div>
       <div class="answer" id="answers3"></div>
     </div>
   </div>
@@ -186,7 +194,15 @@ $("#proceed2").click(function(){
 
 });
 
-$("#proceed3").click(function(){priority
+$("#proceed3").click(function(){
+  drawCard("opt",count3);
+  count3++;
+  if(count3 == data.length){
+    cleanup(3);
+  }
+});
+
+</script>
 <style>
 .tab-content,.nav nav-tabs{
   padding:30px;

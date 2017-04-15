@@ -5,12 +5,12 @@ from . models import SynchroAlg
 
 
 def semaphores(request):
-    algos = SynchroAlg.objects.all()
+    algos = SynchroAlg.objects.filter(demourl="sem")
     context = {'algos': algos}
     return render(request, 'synchro/semaphores_index.html',context = context)
 
 def socket(request):
-    algos = SynchroAlg.objects.all()
+    algos = SynchroAlg.objects.filter(demourl="tcp")
     context = {'algos': algos}
     return render(request, 'synchro/socket_index.html',context = context)
 

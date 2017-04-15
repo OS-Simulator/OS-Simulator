@@ -7,7 +7,7 @@ from django.http import JsonResponse
 
 # Create your views here.
 from . models import DiskSchedAlg
-from . utils import cscan,clook, scan,look,sstf
+from . utils import cscan,clook, scan,look,sstf,fcfs
 
 def home(request):
     algos = DiskSchedAlg.objects.all()
@@ -37,7 +37,7 @@ def gateway(request):
         elif(alg=="CLOOK"):
             result = clook(data)
         elif(alg=="FCFS"):
-            pass
+            result = fcfs(data)
         elif(alg=="SCAN"):
             result = scan(data)
         elif(alg=="LOOK"):

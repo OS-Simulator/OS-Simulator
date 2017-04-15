@@ -7,7 +7,7 @@ from django.http import JsonResponse
 
 # Create your views here.
 from . models import ProcessSchedAlg
-from . utils import rr,sjf,srtf,fcfs,prepri,priority
+from . utils import rr,sjf,srtf,fcfs,prepri,priority,multilevel
 
 def home(request):
     algos = ProcessSchedAlg.objects.all()
@@ -51,5 +51,8 @@ def gateway(request):
             result = prepri(data)
         elif(alg=="NPP"):
             result = priority(data)
+        elif(alg=="MULTIQ"):
+            queues,gantt,table = multilevel(data)
+            result = {"queues":queues, "gantt":gantt,"table":table}
         print(result)
     return JsonResponse(result)
