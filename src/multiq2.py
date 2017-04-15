@@ -3,7 +3,7 @@ def multilevel(table):
     process["Foreground"]=[]
     process["Background"]=[]
     process["Gantt"]=[]
-    output=[]
+    output = []
     for element in table["data"]:
         if element["type"] == 0:
             element["BTL"]=element["bt"]
@@ -127,9 +127,17 @@ def multilevel(table):
                 CTK+=process["Background"][countF]["BTL"]  #Update here
                 updateQ(prevCTK,CTK)
 
+                temp=process["Background"][countF]
+                temp["ct"] = CTK
+                temp["tat"] = CTK - temp["at"]
+                temp["wt"] = temp["tat"] - temp["bt"]
+                output.append(temp)
+
                 countF+=1 #Remove here
                 Backqueue.remove(countF)
                 queues.append({"FQ":Forequeue[:],"BQ":Backqueue[:],"time":CTK}.copy())
+
+
                 #print queues
 
             else:
@@ -152,7 +160,7 @@ def multilevel(table):
     Backqueue=[]
     RoundRobin()
 
-    return queues,process["Gantt"],ouput
+    return queues,process["Gantt"],output
 
 if __name__=="__main__":
 
@@ -185,6 +193,6 @@ if __name__=="__main__":
     table["tq"]=TQ
 
     queues,Gantt,output=multilevel(table)
-
-    # #print queues
-    # #print Gantt
+    print output
+    print queues
+    print Gantt

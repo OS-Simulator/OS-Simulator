@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<style>
+  #container {
+  width: 953px;
+  height: 5px;
+  position: absolute;
+  background: white;
+  top: 68%;
+  left: 18%;
+  }
+  #animate {
+  width: 50px;
+  height: 5px;
+  position: absolute;
+  background-color: white;
+  top: 0%;
+  left: 0%;
+  opacity: 0;
+  }
+</style>
+
+<head>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <div class="container-fluid">
+    <center><h1>TCP socket programming</h1></center>
+    <button class="btn btn-primary" type ="button", onclick ="socket()", style ="height:25px;width:125px;line-height:1">socket()</button> This  function shall create an unbound socket in a communications domain, and return a file descriptor that can be used in later function calls that operate on sockets.
+    <br/><br/>
+    <button id  = "bind" class="btn btn-primary" type ="button", onclick ="bind()", style ="height:25px;width:125px;line-height:1" disabled>bind()</button> This function shall assign a local socket address address to a socket identified by descriptor socket that has no local socket address assigned.
+    <br/><br/>
+    <button id ="listen" class="btn btn-primary" type ="button", onclick ="listen()", style ="height:25px;width:125px;line-height:1" disabled>listen()</button> This function shall mark a connection-mode socket, specified by the socket argument, as accepting connections.
+    <br/><br/>
+    <button id ="connect" class="btn btn-primary" type ="button", onclick ="connect()", style ="height:25px;width:125px;line-height:1" disabled>connect()</button> This function shall attempt to make a connection on a socket
+    <br/><br/>
+    <button id  ="accept"  class="btn btn-primary" type ="button", onclick ="accept()", style ="height:25px;width:125px;line-height:1" disabled>accept()</button> This function shall extract the first connection on the queue of pending connections, create a new socket with the same address family as the specified socket, and allocate a new file descriptor for that socket.
+    <br/><br/>
+    <button id ="move" class="btn btn-primary" type ="button", onclick ="myMove()", style ="height:25px;width:125px;line-height:1" disabled>send()</button> This function sends a message on a socket
+    <br/><br/>
+    <button id ="close" class="btn btn-primary" type ="button", onclick ="closee()", style ="height:25px;width:125px;line-height:1" disabled>close</button> Close the connection
+
+    <button type = "button", id ="server", name = "server", style="height:125px;width:125px;position:absolute;top:60%;left:10%;border-radius:125px;border:1px solid #000">Server </button>
+    <button type = "button", id ="client", name = "client", style="height:125px;width:125px;position:absolute;top:60%;left:80%;border-radius:125px;border:1px solid #000">Client </button>
+
+    <button type = "button", id ="one", name = "one", style="height:30px;width:30px;position:absolute;top:61%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="two", name = "two", style="height:30px;width:30px;position:absolute;top:66%;left:19%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="three", name = "three", style="height:30px;width:30px;position:absolute;top:71%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="four", name = "four", style="height:30px;width:30px;position:absolute;top:57%;left:20%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="five", name = "five", style="height:30px;width:30px;position:absolute;top:66%;left:22%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="six", name = "six", style="height:30px;width:30px;position:absolute;top:75%;left:20%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+
+    <button type = "button", id ="connection", name = "connection", style="height:5px;width:953px;position:absolute;top:68%;left:18%;background-color:white;border:1px solid #FFFFFF"> </button>
+
+    <div id ="container">
+      <div id ="animate"></div>
+    </div>
+
+    <script type ="text/javascript">
+
+    function socket()
+    {
+      document.getElementById("server").style.backgroundColor = '#FFFF00';
+      document.getElementById("client").style.backgroundColor = '#FFFF00';
+      document.getElementById("bind").disabled = false;
+    }
+
+    function bind()
+    {
+      document.getElementById("server").style.backgroundColor = '#FF0000';
+      document.getElementById("listen").disabled = false;
+    }
+
+    function listen()
+    {
+      document.getElementById("one").style.backgroundColor = '#FFFF00';
+      document.getElementById("two").style.backgroundColor = '#FFFF00';
+      document.getElementById("three").style.backgroundColor = '#FFFF00';
+      document.getElementById("four").style.backgroundColor = '#FFFF00';
+      document.getElementById("five").style.backgroundColor = '#FFFF00';
+      document.getElementById("six").style.backgroundColor = '#FFFF00';
+      document.getElementById("connect").disabled = false;
+    }
+
+    function connect()
+    {
+      //document.getElementById("connection").style.border = '1px solid #000000';
+      document.getElementById("container").style.border = '1px solid #000000';
+      document.getElementById("accept").disabled = false;
+      document.getElementById("close").disabled = false;
+    }
+
+    function accept()
+    {
+      //document.getElementById("connection").style.backgroundColor = '#00FF00';
+      document.getElementById("container").style.backgroundColor = '#00FF00';
+      document.getElementById("move").disabled = false;
+    }
+
+    function myMove() {
+      document.getElementById("animate").style.backgroundColor = '#FF0000';
+      document.getElementById("animate").style.opacity = "1.0";
+    var elem = document.getElementById("animate");
+    var pos = 0;
+    var id = setInterval(frame, 5);
+    function frame() {
+      if (pos == 903) {
+        clearInterval(id);
+      } else {
+        pos++;
+        elem.style.left = pos + 'px';
+      }
+      }
+    }
+
+    function closee()
+    {
+      document.getElementById("animate").style.backgroundColor = '#FFFFFF'
+      document.getElementById("server").style.backgroundColor = '#DCDCDC'
+      document.getElementById("client").style.backgroundColor = '#DCDCDC';
+
+      document.getElementById("one").style.backgroundColor = '#FFFFFF';
+      document.getElementById("two").style.backgroundColor = '#FFFFFF';
+      document.getElementById("three").style.backgroundColor = '#FFFFFF';
+      document.getElementById("four").style.backgroundColor = '#FFFFFF';
+      document.getElementById("five").style.backgroundColor = '#FFFFFF';
+      document.getElementById("six").style.backgroundColor = '#FFFFFF';
+
+      document.getElementById("container").style.backgroundColor = '#FFFFFF';
+      document.getElementById("container").style.border = '1px solid #FFFFFF';
+
+      document.getElementById("bind").disabled = true;
+      document.getElementById("listen").disabled = true;
+      document.getElementById("connect").disabled = true;
+      document.getElementById("accept").disabled = true;
+      document.getElementById("move").disabled = true;
+      document.getElementById("close").disabled = true;
+    }
+
+
+    </script>
+  </div>
+</body>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<head>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <div class="container-fluid">
+    <center><h1>Simulation of the Reader-Writer semaphore</u> </h1></center>
+    <form onsubmit="return false">
+      <p><br /></p>
+      <h4>First user:  </h4>
+      Read: <input type = "checkbox", name = "first">
+      Write: <input type = "checkbox" name = "first"><br>
+      <p style="font-size:10px"><br /><br /></p>
+      <h4>Second user: </h4>
+      Read: <input type = "checkbox", name = "second">
+      Write: <input type = "checkbox" name = "second">
+      <p style="font-size:10px"><br /><br /></p>
+      <h4>Third user: </h4>
+      Read: <input type = "checkbox", name = "third">
+      Write: <input type = "checkbox" name = "third">
+      <p style="font-size:10px"><br /><br /></p>
+      <h4>Fourth user: </h4>
+      Read: <input type = "checkbox", name = "fourth">
+      Write: <input type = "checkbox" name = "fourth">
+      <p style="font-size:10px"><br /><br /></p>
+      <h4>Fifth user: </h4>
+      Read: <input type = "checkbox", name = "fifth">
+      Write: <input type = "checkbox" name = "fifth">
+      <p style="font-size:10px"><br /><br /></p>
+      <h4>Sixth user: </h4>
+      Read: <input type = "checkbox", name = "sixth">
+      Write: <input type = "checkbox" name = "sixth">
+      <p style="font-size:10px"><br /><br /></p>
+      <h4>Seventh user: </h4>
+      Read: <input type = "checkbox", name = "seventh">
+      Write: <input type = "checkbox" name = "seventh">
+
+      <br /><br />
+      <input type = "submit", name ="Go!", onclick="update()", class="btn btn-primary">
+    </form>
+
+    <button type = "button", id ="one", name = "one", style="height:80px;width:165px;position:absolute;top:10%;left:15%;background-color:white"> </button>
+    <button type = "button", id ="two", name = "two", style="height:80px;width:165px;position:absolute;top:22%;left:15%;background-color:white"> </button>
+    <button type = "button", id ="three", name = "three", style="height:80px;width:165px;position:absolute;top:34%;left:15%;background-color:white"> </button>
+    <button type = "button", id ="four", name = "four", style="height:80px;width:165px;position:absolute;top:46%;left:15%;background-color:white"> </button>
+    <button type = "button", id ="five", name = "five", style="height:80px;width:165px;position:absolute;top:58%;left:15%;background-color:white"> </button>
+    <button type = "button", id ="six", name = "six", style="height:80px;width:165px;position:absolute;top:70%;left:15%;background-color:white"> </button>
+    <button type = "button", id ="seven", name = "seven", style="height:80px;width:165px;position:absolute;top:82%;left:15%;background-color:white"> </button>
+
+    <button type = "button", id ="lock", class ="btn btn-primary", name = "lock", style="height:100px;width:200px;position:absolute;top:20%;left:75%;font-size:20px">Writing lock: </button>
+
+    <div>
+      <form>
+        <textarea id="doc" style="height:600px;width:450px;position:absolute;top:11%;left:36%;font-size:20px" disabled=""> </textarea>
+      </form>
+    </div>
+    <script type = "text/javascript">
+      var mutex =-1;
+      function update()
+      {
+        var checkW =0;
+        for(var i=0;i<15;i++)
+        {
+          if(i%2 != 0 && document.forms[0].elements[i].checked==true)
+          {
+            checkW=1;
+          }
+        }
+        if(checkW==0)
+        {
+          mutex=-1;
+          var change = document.getElementById("lock");
+          change.innerHTML ="Writing Lock:"
+        }
+
+        for(var i=0;i<15;i++)
+        {
+          if(i%2 !=0 && document.forms[0].elements[i].checked == true && (mutex==(i-1)/2 || mutex==-1))
+          {
+            for(var j=0;j<15;j++)
+            {
+              if(j!=i/* && j%2 ==0*/)// important change made here
+              {
+                document.forms[0].elements[j].checked = false
+              }
+            }
+          }
+        }
+
+        for(var i=0;i<15;i++)
+        {
+          document.getElementById("one").style.backgroundColor = '#FFFFFF';
+          document.getElementById("two").style.backgroundColor = '#FFFFFF';
+          document.getElementById("three").style.backgroundColor = '#FFFFFF';
+          document.getElementById("four").style.backgroundColor = '#FFFFFF';
+          document.getElementById("five").style.backgroundColor = '#FFFFFF';
+          document.getElementById("six").style.backgroundColor = '#FFFFFF';
+          document.getElementById("seven").style.backgroundColor = '#FFFFFF';
+        }
+
+            if(document.forms[0].elements[0].checked == true)
+            {
+              document.getElementById("one").style.backgroundColor = '#00BFFF';
+              mutex =-1;
+            }
+            if(document.forms[0].elements[2].checked == true)
+            {
+              document.getElementById("two").style.backgroundColor = '#00BFFF';
+              mutex =-1;
+            }
+            if(document.forms[0].elements[4].checked == true)
+            {
+              document.getElementById("three").style.backgroundColor = '#00BFFF';
+              mutex =-1;
+            }
+            if(document.forms[0].elements[6].checked == true)
+            {
+              document.getElementById("four").style.backgroundColor = '#00BFFF';
+              mutex =-1;
+            }
+            if(document.forms[0].elements[8].checked == true)
+            {
+              document.getElementById("five").style.backgroundColor = '#00BFFF';
+              mutex =-1;
+            }
+            if(document.forms[0].elements[10].checked == true)
+            {
+              document.getElementById("six").style.backgroundColor = '#00BFFF';
+              mutex =-1;
+            }
+            if(document.forms[0].elements[12].checked == true)
+            {
+              document.getElementById("seven").style.backgroundColor = '#00BFFF';
+              mutex =-1;
+            }
+
+            if(document.forms[0].elements[1].checked == true)
+            {
+              document.getElementById("one").style.backgroundColor = '#DC143C';
+              var change = document.getElementById("lock");
+              change.innerHTML ="Writing Lock: 1"
+              mutex =0;
+            }
+            if(document.forms[0].elements[3].checked == true)
+            {
+              document.getElementById("two").style.backgroundColor = '#DC143C';
+              var change = document.getElementById("lock");
+              change.innerHTML ="Writing Lock: 2"
+              mutex =1;
+            }
+            if(document.forms[0].elements[5].checked == true)
+            {
+              document.getElementById("three").style.backgroundColor = '#DC143C';
+              var change = document.getElementById("lock");
+              change.innerHTML ="Writing Lock: 3"
+              mutex =2;
+            }
+            if(document.forms[0].elements[7].checked == true)
+            {
+              document.getElementById("four").style.backgroundColor = '#DC143C';
+              var change = document.getElementById("lock");
+              change.innerHTML ="Writing Lock: 4"
+              mutex =3;
+            }
+            if(document.forms[0].elements[9].checked == true)
+            {
+              document.getElementById("five").style.backgroundColor = '#DC143C';
+              var change = document.getElementById("lock");
+              change.innerHTML ="Writing Lock: 5"
+              mutex =4;
+            }
+            if(document.forms[0].elements[11].checked == true)
+            {
+              document.getElementById("six").style.backgroundColor = '#DC143C';
+              var change = document.getElementById("lock");
+              change.innerHTML ="Writing Lock: 6"
+              mutex =5;
+            }
+            if(document.forms[0].elements[13].checked == true)
+            {
+              document.getElementById("seven").style.backgroundColor = '#DC143C';
+              var change = document.getElementById("lock");
+              change.innerHTML ="Writing Lock: 7"
+              mutex =6;
+            }
+            console.log(mutex);
+            if(mutex==-1)
+            {
+               document.getElementById("doc").disabled = true;
+            }
+            else
+            {
+                document.getElementById("doc").disabled = false;
+            }
+      }
+    </script>
+
+    <p style="position:absolute;top:60%;left:79%;font-size:22px"><b> Access Legend: </b></p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:65%;left:80%;background-color:#FFFFFF"> </button>
+    <p style="position:absolute;top:65%;left:82%;font-size:20px"> Not accessing </p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:70%;left:80%;background-color:#00BFFF"> </button>
+    <p style="position:absolute;top:70%;left:82%;font-size:20px"> Reading </p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:75%;left:80%;background-color:#DC143C"> </button>
+    <p style="position:absolute;top:75%;left:82%;font-size:20px"> Writing </p>
+  </div>
+</body>

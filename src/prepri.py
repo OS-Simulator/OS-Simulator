@@ -12,10 +12,26 @@ def prepri(data):
     process['table'] = sorted(process['table'], key=itemgetter('at'))
     x = process['table']
     time = x[0]['at']
+    if time>0:
+        temp = {}
+        temp['start'] = 0
+        temp['no'] = -1
+        temp['end'] = time
+
     proc = 0  # current process
 
-    for i in range(n):
-        x[i]['rem'] = x[i]['bt']
+    #check if starting process has lowest priority among others who have same starting time
+    count = 0
+    while x[count]['at'] == time:
+    	count++
+    for i in range(count):
+    	for j in range(count - i - 1):
+    		if x[j]['pri'] > x[j+1]['pri']:
+    			temp = x[j]
+    			x[j] = x[j+1]
+    			x[j+1] = temp
+
+    
     temp = {}
     temp['start'] = time
     temp['no'] = 0

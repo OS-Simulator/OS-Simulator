@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <div class="container-fluid">
+
+    <center><h1>Simulation of the Producer-Consumer Semaphore</h1></center>
+
+    <button type = "button", id ="one", name = "one", style="height:100px;width:165px;position:absolute;top:25%;left:11%;background-color:white"> </button>
+    <button type = "button", id ="two", name = "two", style="height:100px;width:165px;position:absolute;top:25%;left:22%;background-color:white"> </button>
+    <button type = "button", id ="three", name = "three", style="height:100px;width:165px;position:absolute;top:25%;left:33%;background-color:white"> </button>
+    <button type = "button", id ="four", name = "four", style="height:100px;width:165px;position:absolute;top:25%;left:44%;background-color:white"> </button>
+    <button type = "button", id ="five", name = "five", style="height:100px;width:165px;position:absolute;top:25%;left:55%;background-color:white"> </button>
+    <button type = "button", id ="six", name = "six", style="height:100px;width:165px;position:absolute;top:25%;left:66%;background-color:white"> </button>
+    <button type = "button", id ="seven", name = "seven", style="height:100px;width:165px;position:absolute;top:25%;left:77%;background-color:white"> </button>
+
+    <!--button type ="button", onclick ="initiate()">Next!</button-->
+
+    <button class="btn btn-primary" id ="prod", type ="button", onclick ="produce()", style ="height:150px;width:250px;position:absolute;top:50%;left:30%;font-size:25px">Produce</button>
+    <button class="btn btn-primary" id ="con", type ="button", onclick ="consume()", style ="height:150px;width:250px;position:absolute;top:50%;left:55%;font-size:25px">Consume</button>
+
+    <button class="btn btn-warning" id ="buffer-size", type ="button" style ="height:50px;width:143px;position:absolute;top:75%;left:46%;">BUFFER_SIZE = 7</button>
+    <button class="btn btn-warning" id ="count", type ="button" style ="height:50px;width:143px;position:absolute;top:83%;left:46%;">counter = 0</button>
+
+    <div>
+      <form>
+        <textarea id="doc" style="height:230px;width:265px;position:absolute;top:60%;left:7%;font-size:13px;background-color:white;border:solid 2px orange;" disabled="">
+  while(1)
+  {
+      /* produce an item in next_produced */
+
+      while (counter==BUFFER_SIZE)
+        ; /* do nothing */
+
+      buffer[in] = next_produced;
+      in = (in + 1) % BUFFER_SIZE;
+      counter++;
+  }
+        </textarea>
+      </form>
+    </div>
+
+    <div>
+      <form>
+        <textarea id="doc" style="height:230px;width:265px;position:absolute;top:60%;right:7%;font-size:13px;background-color:white;border:solid 2px orange;" disabled="">
+  while(1)
+  {
+      while(counter == 0)
+        ; /* do nothing */
+
+      next_consumed = buffer[out];
+      out = (out+1) % BUFFER_SIZE;
+      counter--;
+
+      /* consume an item in next_consumed */
+  }
+        </textarea>
+      </form>
+    </div>
+
+    <script type = "text/javascript">
+      var queue = [0,0,0,0,0,0,0]; var num=0;
+      var rear =-1; var front =-1;
+
+      function counter()
+      {
+        var counter = rear-front +1;
+        console.log(rear)
+        if(rear == -1 )
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="counter = 0"
+        }
+        else if(counter==1)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="counter = 1"
+        }
+        if(counter==2)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="counter = 2"
+        }
+        if(counter==3)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="counter = 3"
+        }
+        if(counter==4)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="counter = 4"
+        }
+        if(counter==5)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="counter = 5"
+        }
+        if(counter==6)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="counter = 6"
+        }
+        if(counter==7)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="counter = 7"
+        }
+
+      }
+
+      function check()
+      {
+        if(num>0)
+        {
+          document.getElementById("con").disabled = false;
+        }
+        if(num<6)
+        {
+          document.getElementById("prod").disabled = false;
+        }
+      }
+
+      function color()
+      {
+        if(queue[0]==1)
+        {
+          document.getElementById("one").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[1]==1)
+        {
+          document.getElementById("two").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[2]==1)
+        {
+          document.getElementById("three").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[3]==1)
+        {
+          document.getElementById("four").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[4]==1)
+        {
+          document.getElementById("five").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[5]==1)
+        {
+          document.getElementById("six").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[6]==1)
+        {
+          document.getElementById("seven").style.backgroundColor = '#00BFFF';
+        }
+
+        if(queue[0]==0)
+        {
+          document.getElementById("one").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[1]==0)
+        {
+          document.getElementById("two").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[2]==0)
+        {
+          document.getElementById("three").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[3]==0)
+        {
+          document.getElementById("four").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[4]==0)
+        {
+          document.getElementById("five").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[5]==0)
+        {
+          document.getElementById("six").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[6]==0)
+        {
+          document.getElementById("seven").style.backgroundColor = '#FFFFFF';
+        }
+        check();
+      }
+
+      function produce()
+      {
+          num++;
+          if(num==7)
+          {
+            document.getElementById("prod").disabled = true;
+          }
+          if(front == -1 && rear ==-1)
+          {
+            front =0;
+            rear =0;
+            queue[rear] =1;
+          }
+          else
+          {
+              rear = (rear+1)%7;
+              queue[rear]=1;
+          }
+
+        color();
+        counter();
+      }
+
+      function consume()
+      {
+
+        num--;
+        if(num==0)
+        {
+          document.getElementById("con").disabled = true;
+        }
+        if(front==rear)
+        {
+          queue[front] =0;
+          front =-1;
+          rear =-1;
+        }
+        else
+        {
+          queue[front]=0;
+          front = (front+1)%7;
+        }
+        color();
+        counter();
+      }
+    </script>
+  </div>
+</body>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<style>
+  #container {
+  width: 953px;
+  height: 5px;
+  position: absolute;
+  background: white;
+  top: 58%;
+  left: 18%;
+  }
+  #animate {
+  width: 50px;
+  height: 5px;
+  position: absolute;
+  background-color: white;
+  top: 0%;
+  left: 95%;
+  opacity: 0;
+  }
+</style>
+
+<head>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <div class="container-fluid">
+    <center><h1 >UDP socket programming <br /></h1></center>
+
+    <button class="btn btn-primary" type ="button", onclick ="socket()", style ="height:25px;width:125px;line-height:1">socket()</button> This function shall create an unbound socket in a communications domain, and return a file descriptor that can be used in later function calls that operate on sockets.
+    <br/><br/>
+    <button id ="bind" class="btn btn-primary" type ="button", onclick ="bind()", style ="height:25px;width:125px;line-height:1" disabled>bind()</button> This function shall assign a local socket address address to a socket identified by descriptor socket that has no local socket address assigned.
+    <br/><br/>
+    <button id ="receive" class="btn btn-primary" type ="button", onclick ="receive()", style ="height:25px;width:125px;line-height:1" disabled>receive()</button> This function receives a message from a connectionless-mode socket.
+    <br/><br/>
+    <button id="send" class="btn btn-primary" type ="button", onclick ="send()", style ="height:25px;width:125px;line-height:1" disabled>send()</button> This function sends a message to a gived destination address through a connectionless-mode socket.
+    <br/><br/>
+    <button id ="close" class="btn btn-primary" type ="button", onclick ="closee()", style ="height:25px;width:125px;line-height:1" disabled>close()</button> This function closes the communication.
+
+    <button type = "button", id ="server", name = "server", style="height:125px;width:125px;position:absolute;top:50%;left:10%;border-radius:125px;border:1px solid #000">Server </button>
+    <button type = "button", id ="client", name = "client", style="height:125px;width:125px;position:absolute;top:50%;left:80%;border-radius:125px;border:1px solid #000">Client </button>
+
+    <button type = "button", id ="one", name = "one", style="height:30px;width:30px;position:absolute;top:51%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="two", name = "two", style="height:30px;width:30px;position:absolute;top:56%;left:19%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="three", name = "three", style="height:30px;width:30px;position:absolute;top:61%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="four", name = "four", style="height:30px;width:30px;position:absolute;top:47%;left:20%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="five", name = "five", style="height:30px;width:30px;position:absolute;top:56%;left:22%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="six", name = "six", style="height:30px;width:30px;position:absolute;top:65%;left:20%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+
+    <button type = "button", id ="connection", name = "connection", style="height:5px;width:953px;position:absolute;top:58%;left:18%;background-color:white;border:1px solid #FFFFFF"> </button>
+
+    <div id ="container">
+      <div id ="animate"></div>
+    </div>
+
+    <script type ="text/javascript">
+
+    function socket()
+    {
+      document.getElementById("server").style.backgroundColor = '#FFFF00';
+      document.getElementById("client").style.backgroundColor = '#FFFF00';
+      document.getElementById("bind").disabled = false;
+    }
+
+    function bind()
+    {
+      document.getElementById("server").style.backgroundColor = '#FF0000';
+      document.getElementById("receive").disabled = false;
+      document.getElementById("close").disabled = false;
+    }
+
+    function receive()
+    {
+      document.getElementById("animate").style.backgroundColor = '#FF0000';
+      document.getElementById("animate").style.opacity = "1.0";
+      var elem = document.getElementById("animate");
+      var pos = 903;
+      var id = setInterval(frame, 5);
+      function frame()
+      {
+        if (pos == 0)
+        {
+          clearInterval(id);
+          document.getElementById("animate").style.backgroundColor = '#FFFFFF';
+        }
+        else
+        {
+          pos--;
+          elem.style.left = pos + 'px';
+        }
+      }
+      document.getElementById("send").disabled = false;
+    }
+
+    function send()
+    {
+      document.getElementById("animate").style.backgroundColor = '#0000FF'
+      document.getElementById("animate").style.opacity = "1.0";
+      var elem = document.getElementById("animate");
+      var pos = 0;
+      var id = setInterval(frame, 5);
+      function frame()
+      {
+        if (pos == 903)
+        {
+          clearInterval(id);
+          document.getElementById("animate").style.backgroundColor = '#FFFFFF';
+        }
+        else
+        {
+          pos++;
+          elem.style.left = pos + 'px';
+        }
+      }
+    }
+
+    function closee()
+    {
+      document.getElementById("animate").style.backgroundColor = '#FFFFFF'
+      document.getElementById("server").style.backgroundColor = '#DCDCDC'
+      document.getElementById("client").style.backgroundColor = '#DCDCDC';
+      document.getElementById("bind").disabled = true;
+      document.getElementById("receive").disabled = true;
+      document.getElementById("send").disabled = true;
+      document.getElementById("close").disabled = true;
+    }
+
+
+    </script>
+  </div>
+</body>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <div class="container-fluid">
+
+    <center><h1>Simulation of the Sleeping Barber Problem</h1></center>
+
+    <button type = "button", id ="room", name = "room", style="height:600px;width:1325px;position:absolute;top:10%;left:7%;background-color:	#CD853F"> </button>
+    <button type = "button", id ="mirror", name = "mirror", style="height:25px;width:190px;position:absolute;top:10%;left:63%;background-color:#00BFFF"> </button>
+    <button type = "button", id ="seat", name = "seat", style="height:200px;width:220px;position:absolute;top:15%;left:62%;background-color:#DC143C"> </button>
+    <button type = "button", id ="cust", name = "cust", style="height:125px;width:125px;position:absolute;top:20%;left:65%;border-radius:125px;border:1px solid #DC143C;background-color:#DC143C"></button>
+    <button type = "button", id ="barber", name = "barber", style="height:125px;width:125px;position:absolute;top:45%;left:65%;border-radius:125px;border:1px solid #000">Barber </button>
+
+
+    <button type = "button", id ="one", name = "one", style="height:100px;width:120px;position:absolute;top:75%;left:11%;background-color:white"> Seat 1 </button>
+    <button type = "button", id ="two", name = "two", style="height:100px;width:120px;position:absolute;top:75%;left:20%;background-color:white"> Seat 2</button>
+    <button type = "button", id ="three", name = "three", style="height:100px;width:120px;position:absolute;top:75%;left:29%;background-color:white"> Seat 3</button>
+    <button type = "button", id ="four", name = "four", style="height:100px;width:120px;position:absolute;top:75%;left:38%;background-color:white"> Seat 4</button>
+    <button type = "button", id ="five", name = "five", style="height:100px;width:120px;position:absolute;top:75%;left:47%;background-color:white"> Seat 5</button>
+    <button type = "button", id ="six", name = "six", style="height:100px;width:120px;position:absolute;top:75%;left:56%;background-color:white"> Seat 6</button>
+    <button type = "button", id ="seven", name = "seven", style="height:100px;width:120px;position:absolute;top:75%;left:65%;background-color:white"> Seat 7</button>
+
+    <!--button type ="button", onclick ="initiate()">Next!</button-->
+
+    <button class="btn btn-primary" id ="prod", type ="button", onclick ="produce()", style ="height:150px;width:250px;position:absolute;top:20%;left:15%;font-size:25px">Enter</button>
+    <button class="btn btn-primary" id ="con", type ="button", onclick ="exit()", style ="height:150px;width:250px;position:absolute;top:45%;left:15%;font-size:25px" disabled>Exit</button>
+
+    <button class="btn btn-warning" id ="buffer-size", type ="button" style ="height:50px;width:143px;position:absolute;top:25%;left:42%;">Waiting Seats = 7</button>
+    <button class="btn btn-warning" id ="count", type ="button" style ="height:50px;width:143px;position:absolute;top:33%;left:42%;">waiting = 0</button>
+
+
+    <script type = "text/javascript">
+      var queue = [0,0,0,0,0,0,0]; var num=0;
+      var rear =-1; var front =-1;
+      var hc = 0;
+
+      function counter()
+      {
+        var counter = rear-front +1;
+        console.log(rear)
+        if(rear == -1 )
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="waiting = 0"
+        }
+        else if(counter==1)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="waiting = 1"
+        }
+        if(counter==2)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="waiting = 2"
+        }
+        if(counter==3)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="waiting = 3"
+        }
+        if(counter==4)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="waiting = 4"
+        }
+        if(counter==5)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="waiting = 5"
+        }
+        if(counter==6)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="waiting = 6"
+        }
+        if(counter==7)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="waiting = 7"
+        }
+
+      }
+
+      function check()
+      {
+        if(hc==1)
+        {
+          document.getElementById("con").disabled = false;
+        }
+        if(num<6)
+        {
+          document.getElementById("prod").disabled = false;
+        }
+      }
+
+      function color()
+      {
+        if(hc == 1)
+        {
+          document.getElementById("cust").style.backgroundColor = '#00BFFF';
+          document.getElementById("barber").style.backgroundColor = '#FFFF00';
+        }
+        if(hc == 0)
+        {
+          document.getElementById("cust").style.backgroundColor = '#DC143C'
+          document.getElementById("barber").style.backgroundColor = '#DCDCDC'
+        }
+        if(queue[0]==1)
+        {
+          document.getElementById("one").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[1]==1)
+        {
+          document.getElementById("two").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[2]==1)
+        {
+          document.getElementById("three").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[3]==1)
+        {
+          document.getElementById("four").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[4]==1)
+        {
+          document.getElementById("five").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[5]==1)
+        {
+          document.getElementById("six").style.backgroundColor = '#00BFFF';
+        }
+        if(queue[6]==1)
+        {
+          document.getElementById("seven").style.backgroundColor = '#00BFFF';
+        }
+
+        if(queue[0]==0)
+        {
+          document.getElementById("one").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[1]==0)
+        {
+          document.getElementById("two").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[2]==0)
+        {
+          document.getElementById("three").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[3]==0)
+        {
+          document.getElementById("four").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[4]==0)
+        {
+          document.getElementById("five").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[5]==0)
+        {
+          document.getElementById("six").style.backgroundColor = '#FFFFFF';
+        }
+        if(queue[6]==0)
+        {
+          document.getElementById("seven").style.backgroundColor = '#FFFFFF';
+        }
+        check();
+      }
+
+      function produce()
+      {
+          num++;
+          if(num==7)
+          {
+            document.getElementById("prod").disabled = true;
+          }
+          if(front == -1 && rear ==-1)
+          {
+            front =0;
+            rear =0;
+            queue[rear] =1;
+          }
+          else
+          {
+              rear = (rear+1)%7;
+              queue[rear]=1;
+          }
+
+          if(hc==0)
+          {
+            hc=1;
+            consume();
+          }
+        color();
+        counter();
+
+      }
+
+      function consume()
+      {
+        num--;
+        if(num==0 && hc == 0)
+        {
+          document.getElementById("con").disabled = true;
+        }
+        if(front==rear)
+        {
+          queue[front] =0;
+          front =-1;
+          rear =-1;
+        }
+        else
+        {
+          queue[front]=0;
+          front = (front+1)%7;
+        }
+        color();
+        counter();
+      }
+
+      function exit()
+      {
+        if(hc == 1)
+        {
+          if(rear!=-1)
+          {
+            consume();
+          }
+          else
+          {
+            hc=0;
+            color();
+          }
+          if(hc == 0)
+          {
+            document.getElementById("con").disabled = true;
+          }
+        }
+      }
+    </script>
+
+    <p style="position:absolute;top:60%;left:79%;font-size:22px"><b> For Barber: </b></p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:65%;left:80%;background-color:#DCDCDC"> </button>
+    <p style="position:absolute;top:65%;left:82%;font-size:20px"> Sleeping </p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:70%;left:80%;background-color:#FFFF00"> </button>
+    <p style="position:absolute;top:70%;left:82%;font-size:20px"> Awake </p>
+    <p style="position:absolute;top:75%;left:79%;font-size:22px"><b> For Seats: </b></p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:80%;left:80%;background-color:#FFFFFF"> </button>
+    <p style="position:absolute;top:80%;left:82%;font-size:20px"> Available </p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:85%;left:80%;background-color:#00BFFF"> </button>
+    <p style="position:absolute;top:85%;left:82%;font-size:20px"> Occupied </p>
+
+  </div>
+</body>

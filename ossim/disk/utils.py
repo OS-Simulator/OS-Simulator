@@ -351,6 +351,6 @@ def fcfs(inputDict):
         result['displacement'] += abs(curr-req)
         curr = req
 
-    result['sequence'] = r
+    result["sequence"] = [[r[i],-i] for i in range(len(r))]
 
     return result

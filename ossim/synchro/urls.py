@@ -4,8 +4,9 @@ from . import views
 
 app_name = 'synchro'
 urlpatterns =[
-    url(r'^$', views.home, name='index'),
-    url(r'^(?P<pk>[0-9]+)/$', views.detail, name='detail'),
-    #url(r'^demo/(?P<pk>[0-9]+)/$', views.demo, name='demo'),
+    url(r'^semaphores/$', views.semaphores, name='semaphores'),
+    url(r'^socket/$', views.socket, name='socket'),
+    url(r'^semaphores/demo/(?P<pk>[0-9]+)/$', views.sem_demo, name='sem_demo'),
+    url(r'^socket/demo/(?P<pk>[0-9]+)/$', views.socket_demo, name='socket_demo'),
 
 ]

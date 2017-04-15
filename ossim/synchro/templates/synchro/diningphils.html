@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<head>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <div class="container-fluid">
+    <center><h1>Simulation of the Dining Philosopher's semaphore</h1></center>
+    <button type ="button", class = "btn btn-primary", onclick ="initiate()", style="height:150px;width:250px;position:absolute;top:20%;left:5%;font-size:25px"  >Next!</button>
+
+    <button type = "button", id ="num", name = "num", class = "btn btn-primary", style="height:70px;width:300px;position:absolute;top:25%;left:75%;font-size:17px">Random number generated: </button>
+
+    <button type = "button", id ="table", name = "table", style="height:435px;width:435px;position:absolute;top:23%;left:35%;border-radius:435px;border:1px solid #000;background-color:#CD853F"> </button>
+    <img src="food.png" alt="Mountain View" style="position:absolute;left:41%;top:37%;width:250px;height:250px;">
+
+    <button type = "button", id ="one", name = "one", style="height:125px;width:125px;position:absolute;top:12%;left:45%;border-radius:125px;border:1px solid #000"> P1 </button>
+    <button type = "button", id ="five", name = "one", style="height:125px;width:125px;position:absolute;top:35%;left:30%;border-radius:125px;border:1px solid #000"> P5 </button>
+    <button type = "button", id ="two", name = "one", style="height:125px;width:125px;position:absolute;top:35%;left:60%;border-radius:125px;border:1px solid #000"> P2 </button>
+    <button type = "button", id ="four", name = "one", style="height:125px;width:125px;position:absolute;top:68%;left:37%;border-radius:125px;border:1px solid #000"> P4 </button>
+    <button type = "button", id ="three", name = "one", style="height:125px;width:125px;position:absolute;top:68%;left:54%;border-radius:125px;border:1px solid #000"> P3 </button>
+
+    <button type = "button", id ="first", name = "one", style="height:50px;width:50px;position:absolute;top:30%;left:41%;border-radius:50px;border:1px solid #000"> F1 </button>
+    <button type = "button", id ="second", name = "one", style="height:50px;width:50px;position:absolute;top:30%;left:55%;border-radius:50px;border:1px solid #000"> F2 </button>
+    <button type = "button", id ="third", name = "one", style="height:50px;width:50px;position:absolute;top:57%;left:59%;border-radius:50px;border:1px solid #000"> F3 </button>
+    <button type = "button", id ="fifth", name = "one", style="height:50px;width:50px;position:absolute;top:57%;left:36%;border-radius:50px;border:1px solid #000"> F5 </button>
+    <button type = "button", id ="fourth", name = "one", style="height:50px;width:50px;position:absolute;top:72%;left:48%;border-radius:50px;border:1px solid #000"> F4 </button>
+
+
+    <script type = "text/javascript">
+      var phils= [0,0,0,0,0], forks=[0,0,0,0,0];
+      function initiate()
+      {
+          var num = Math.random();
+          var n = Math.floor(num*5);
+
+          if(n==0)
+          {
+            var change = document.getElementById("num");
+            change.innerHTML ="Random number generated: 1"
+          }
+          if(n==1)
+          {
+            var change = document.getElementById("num");
+            change.innerHTML ="Random number generated: 2"
+          }
+          if(n==2)
+          {
+            var change = document.getElementById("num");
+            change.innerHTML ="Random number generated: 3"
+          }
+          if(n==3)
+          {
+            var change = document.getElementById("num");
+            change.innerHTML ="Random number generated: 4"
+          }
+          if(n==4)
+          {
+            var change = document.getElementById("num");
+            change.innerHTML ="Random number generated: 5"
+          }
+
+          if(phils[n]==0)
+          {
+            phils[n]=1;
+          }
+          else if(phils[n]==1)
+          {
+            if(forks[n]==0 && forks[(n+1)%5]==0)
+            {
+              phils[n]=2;
+              forks[n]=1;
+              forks[(n+1)%5]=1;
+            }
+            else
+            {
+              alert("He can't start eating now!");
+            }
+          }
+          else if(phils[n]==2)
+          {
+            phils[n]=0;
+            forks[n]=0;
+            forks[(n+1)%5]=0;
+          }
+
+          if(phils[0]==0)
+          {
+            document.getElementById("one").style.backgroundColor = '#DCDCDC';
+          }
+          if(phils[1]==0)
+          {
+            document.getElementById("two").style.backgroundColor = '#DCDCDC';
+          }
+          if(phils[2]==0)
+          {
+            document.getElementById("three").style.backgroundColor = '#DCDCDC';
+          }
+          if(phils[3]==0)
+          {
+            document.getElementById("four").style.backgroundColor = '#DCDCDC';
+          }
+          if(phils[4]==0)
+          {
+            document.getElementById("five").style.backgroundColor = '#DCDCDC';
+          }
+
+
+
+          if(phils[0]==1)
+          {
+            document.getElementById("one").style.backgroundColor = '#FFFF00';
+          }
+          if(phils[1]==1)
+          {
+            document.getElementById("two").style.backgroundColor = '#FFFF00';
+          }
+          if(phils[2]==1)
+          {
+            document.getElementById("three").style.backgroundColor = '#FFFF00';
+          }
+          if(phils[3]==1)
+          {
+            document.getElementById("four").style.backgroundColor = '#FFFF00';
+          }
+          if(phils[4]==1)
+          {
+            document.getElementById("five").style.backgroundColor = '#FFFF00';
+          }
+
+          if(phils[0]==2)
+          {
+            document.getElementById("one").style.backgroundColor = '#FF0000';
+          }
+          if(phils[1]==2)
+          {
+            document.getElementById("two").style.backgroundColor = '#FF0000';
+          }
+          if(phils[2]==2)
+          {
+            document.getElementById("three").style.backgroundColor = '#FF0000';
+          }
+          if(phils[3]==2)
+          {
+            document.getElementById("four").style.backgroundColor = '#FF0000';
+          }
+          if(phils[4]==2)
+          {
+            document.getElementById("five").style.backgroundColor = '#FF0000';
+          }
+
+          if(forks[0]==0)
+          {
+            document.getElementById("first").style.backgroundColor = '#DCDCDC';
+          }
+          if(forks[1]==0)
+          {
+            document.getElementById("second").style.backgroundColor = '#DCDCDC';
+          }
+          if(forks[2]==0)
+          {
+            document.getElementById("third").style.backgroundColor = '#DCDCDC';
+          }
+          if(forks[3]==0)
+          {
+            document.getElementById("fourth").style.backgroundColor = '#DCDCDC';
+          }
+          if(forks[4]==0)
+          {
+            document.getElementById("fifth").style.backgroundColor = '#DCDCDC';
+          }
+
+
+
+          if(forks[0]==1)
+          {
+            document.getElementById("first").style.backgroundColor = '#FF0000';
+          }
+          if(forks[1]==1)
+          {
+            document.getElementById("second").style.backgroundColor = '#FF0000';
+          }
+          if(forks[2]==1)
+          {
+            document.getElementById("third").style.backgroundColor = '#FF0000';
+          }
+          if(forks[3]==1)
+          {
+            document.getElementById("fourth").style.backgroundColor = '#FF0000';
+          }
+          if(forks[4]==1)
+          {
+            document.getElementById("fifth").style.backgroundColor = '#FF0000';
+          }
+      }
+    </script>
+
+    <p style="position:absolute;top:60%;left:79%;font-size:22px"><b> For Philosopher: </b></p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:65%;left:80%;background-color:#DCDCDC"> </button>
+    <p style="position:absolute;top:65%;left:82%;font-size:20px"> Thinking </p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:70%;left:80%;background-color:#FFFF00"> </button>
+    <p style="position:absolute;top:70%;left:82%;font-size:20px"> Hungry </p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:75%;left:80%;background-color:#FF0000"> </button>
+    <p style="position:absolute;top:75%;left:82%;font-size:20px"> Eating </p>
+    <p style="position:absolute;top:80%;left:79%;font-size:22px"><b> For Chopsticks: </b></p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:85%;left:80%;background-color:#DCDCDC"> </button>
+    <p style="position:absolute;top:85%;left:82%;font-size:20px"> Available </p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:90%;left:80%;background-color:#FF0000"> </button>
+    <p style="position:absolute;top:90%;left:82%;font-size:20px"> Engaged </p>
+
+  </div>
+</body>

@@ -4,13 +4,32 @@ from django.shortcuts import render
 from . models import SynchroAlg
 
 
-def home(request):
+def semaphores(request):
     algos = SynchroAlg.objects.all()
     context = {'algos': algos}
-    return render(request, 'synchro/index.html',context = context)
+    return render(request, 'synchro/semaphores_index.html',context = context)
 
-def detail(request,pk):
-    alg = get_object_or_404(ProcessSchedAlg, pk=pk)
-    context = {'alg':alg,
-               }
-    return render(request,'synchro/detail.html',context=context)
+def socket(request):
+    algos = SynchroAlg.objects.all()
+    context = {'algos': algos}
+    return render(request, 'synchro/socket_index.html',context = context)
+
+def demo(request):
+    return render(request,'memory/page.html')
+
+
+def sem_demo(request,pk):
+    if(pk=='1'):
+        return render(request, 'synchro/prodcon2.html')
+    if(pk=='2'):
+        return render(request, 'synchro/readerwriter.html')
+    if(pk=='3'):
+        return render(request, 'synchro/diningphils.html')
+    if(pk=='4'):
+        return render(request, 'synchro/sleepingbarber.html')
+
+def socket_demo(request,pk):
+    if(pk=='1'):
+        return render(request, 'synchro/TCP.html')
+    if(pk=='2'):
+        return render(request, 'synchro/UDP.html')

@@ -1,0 +1,25 @@
+{% extends "ossim/base.html" %}
+
+{% block title %} <title> Semaphores and Synchronization </title> {% endblock %}
+
+
+
+
+{% block content %}
+<div class="main-container">
+{% for alg in algos %}
+  {% if alg.demourl|stringformat:"s" == "tcp"  %}
+    <div class="alg-container">
+      <div class="alg-name">  {{alg.name}} </div>
+      <div class="alg-description">
+        {{alg.description}}
+      </div>
+    <a href="/synchro/socket/demo/{{forloop.counter}}/" class="btn btn-primary">Demo</a>
+    </div>
+    <br>
+  {% endif %}
+{% endfor %}
+
+
+</div>
+{% endblock %}
