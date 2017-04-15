@@ -79,13 +79,20 @@
   	<h3>Table</h3>
   </div>
   	<div class="panel-content">
-	<table id="ptable" class="table table-hover">
-  <th>PNO.</th>
+	<table id="ptab" class="table table-bordered">
+ 	<thead>
+ 	<tr id="thead">
+ 	<th>PNO.</th>
 	<th>Arrival time</th>
 	<th>Burst time</th>
 	<th>Completion time</th>
 	<th>Waiting time</th>
 	<th>Turn-around time</th>
+	</tr>
+	<tbody id="ptable">
+		
+	</tbody>
+	</thead>
 	</table>
   	</div>
   	</div>
@@ -105,7 +112,7 @@
       pixel = 0;
       i = 0;
       $('#outer-div,#comments,#ptable').empty();
-      $('#ptable').append('<th>PNO.</th> <th>Arrival time</th>  <th>Burst time</th>  <th>Completion time</th>  <th>Waiting time</th>  <th>Turn-around time</th>');
+      // $('#thead').append('<th>PNO.</th> <th>Arrival time</th>  <th>Burst time</th>  <th>Completion time</th>  <th>Waiting time</th>  <th>Turn-around time</th>');
       totalTime = sequence[total-1].stop;
       pixel = parseInt(800/totalTime);
       containerWidth = pixel*totalTime + 2;

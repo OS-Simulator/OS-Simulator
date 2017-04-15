@@ -1,0 +1,26 @@
+body{
+  text-align: center;
+}
+#outer-div{
+  margin: auto;
+  width: 802px;
+  height: 100px;
+  position: relative;
+  border: 1px solid black;
+}
+.block{
+  position: relative;
+  display: none;
+  border-right: 1px solid black;
+  float: left;
+  text-align: center;
+  height: 98px;
+}
+.bottom{
+  position: absolute;
+  width: 100%;
+  margin-top: 100px;
+  text-align: right;
+  margin-bottom: 1;
+}
+
