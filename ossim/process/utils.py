@@ -80,6 +80,12 @@ def srtf(data):
     process['table'] = sorted(process['table'], key=itemgetter('at'))
     x = process['table']
     time = x[0]['at']
+    if time>0:
+        temp = {}
+        temp['start'] = 0
+        temp['no'] = -1
+        temp['stop'] = time
+        process['gantt'].append(temp)
     proc = 0  #current process
 
     for i in range(n):
@@ -141,7 +147,7 @@ def srtf(data):
                         min = i
                 if proc != min:
                     temp['stop'] = time
-                    temp['no'] = min + 1
+                    temp['no'] = -1
                     process['gantt'].append(temp)
                     temp = {}
                     temp['start'] = time
@@ -160,16 +166,16 @@ def fcfs(data):
 
     n = len(data)
     time = 0
-    left = n
-    average_tat = 0
-    average_wt = 0
 
     process['table'] = sorted(process['table'], key=itemgetter('at'))
-    if process['table'][0]['at'] != 0:
-        process['gantt'].append({'no' : -1, 'start' : 0, 'stop' : process['table'][0]['at']})
     x = process['table']
     time = x[0]['at']
-    proc = 0  #current process
+    if time>0:
+        temp = {}
+        temp['start'] = 0
+        temp['no'] = -1
+        temp['stop'] = time
+        process['gantt'].append(temp)
     temp={}
 
     for i in range(n):
@@ -178,15 +184,22 @@ def fcfs(data):
         if time >= x[i]['at']:
             temp['start'] = time
         else:
-            time = x[i]['at']
+            temp = {}
             temp['start'] = time
+            temp['no'] = -1
+            time = x[i]['at']
+            temp['stop'] = time
+            process['gantt'].append(temp)
+            temp = {}
+            temp['start'] = time
+            temp['no'] = i + 1
         time += x[i]['bt']
         x[i]['ct'] = time
         x[i]['tat'] = time - x[i]['at']
         x[i]['wt'] = x[i]['tat'] - x[i]['bt']
         temp['stop'] = time
         process['gantt'].append(temp)
-    process['table'] = x
+
     return process
 
 def sjf(data):
@@ -240,6 +253,12 @@ def prepri(data):
     process['table'] = sorted(process['table'], key=itemgetter('at'))
     x = process['table']
     time = x[0]['at']
+    if time>0:
+        temp = {}
+        temp['start'] = 0
+        temp['no'] = -1
+        temp['stop'] = time
+        process['gantt'].append(temp)
     proc = 0  # current process
 
     for i in range(n):
