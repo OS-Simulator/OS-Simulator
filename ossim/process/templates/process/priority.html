@@ -110,6 +110,12 @@
     $.post('/process/gateway/',{value:text, algo:alg}, function(result){
       sequence = result["gantt"];
       a = result["table"]
+      avgwt =0;
+      avgtat =0;
+      for(i=0;i<a.length;++i){
+        avgwt += a[i].wt;
+        avgtat += a[i].tat;
+      }
       total = sequence.length;
       pixel = 0;
       i = 0;
