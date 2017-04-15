@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Memory Management
+    </title>
+
+        <!-- CSS Additional Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mft/style.css' %}">
+
+
+    <!-- JavaScript Additional Files -->
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/mft/main.js' %}"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div id="page-heading">
+        <h1>
+            Multiprogramming With Fixed Number of Tasks
+        </h1>
+    </div>
+    <div id="input-data-form">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+        <div id="input-data-heading">
+            <h3>Please Enter the following data</h3>
+        </div>
+        {% if invalid_data == True %}
+            <p style="color:red">Invalid Data</p>
+        {% endif %}
+        <form class="form-horizontal" id="data-form" action="{% url 'mat:mat-get-data' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="total_memory_input">Total Memory: </label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" name="total_memory" id="total_memory_input" placeholder="Enter Total Memory" required min="1" step="1">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="no_of_blocks">No. of Blocks: </label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" name="no_of_blocks" id="no_of_blocks_input" placeholder="Enter No. of Blocks" required min="1" style="1/">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" value="Next" id="next-button" class="btn btn-default">Next</button>
+            </div>
+            <div id="part-2"></div>
+            <div class="form-group">
+                <input id="submit-button" type="submit" value="Submit" class="btn btn-info">
+            </div>
+        </form>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^synchro/', include('synchro.urls')),
     url(r'^process/', include('process.urls')),
     url(r'^memory/', include('memory.urls')),
+    url(r'^mat/', include('mat.urls')),
 
 
 

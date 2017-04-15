@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Memory Allocation Techniques
+    </title>
+
+
+    <!-- CSS Additional Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+    <!-- JavaScript Additional Files -->
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div id="top-content">
+        <h1 id="page-heading">
+            Memory Management Techniques
+        </h1>
+    </div>
+    <div id="middle-content" style="margin-top:15%;">
+        <h3 style="text-align: center">What do you want to see?</h3>
+        <br>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3" style="text-align: center;">
+                <a href="{% url 'mat:mat-get-data' %}">
+                <div id="link" style="margin-left: 25%;">
+                    <h3>MFT</h3>
+                </div>
+                </a>
+            </div>
+            <div class="col-sm-3" style="text-align: center;">
+                <a href="{% url 'mat:mvt-get-data' %}">
+                <div id="link" style="margin-left:25%;">
+                    <h3>MVT</h3>
+                </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

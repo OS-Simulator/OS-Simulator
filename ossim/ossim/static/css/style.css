@@ -1,0 +1,33 @@
+#page-heading{
+    display: none;
+    text-align: center;
+}
+
+#input-data-form{
+    display: none;
+    text-align: center;
+    margin-top: 10%;
+}
+
+#part-2{
+    display: none;
+}
+
+#submit-button{
+    display: none;
+}
+
+#middle-content{
+    display: none;
+}
+
+#link{
+    padding: 50px;
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+#link:hover{
+    background: rgba(105, 105, 105, 0.4);
+}
