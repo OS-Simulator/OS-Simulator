@@ -2,7 +2,7 @@ from queue import *
 from operator import itemgetter
 
 
-def rr(data):
+def rr(data,tq):
 
     process = {}
     process['table'] = data
@@ -13,7 +13,7 @@ def rr(data):
     flag = 0
     a_tat = 0.0
     a_wt = 0.0
-    tq = 2
+    tq = tq
     process['table'] = sorted(process['table'], key=itemgetter('at'))
     tbt = []
     for bt in process['table']:
@@ -180,7 +180,7 @@ def fcfs(data):
 
     for i in range(n):
         temp = {}
-        temp['no'] = i + 1
+        temp['no'] = x[i]['no']
         if time >= x[i]['at']:
             temp['start'] = time
         else:
@@ -192,7 +192,7 @@ def fcfs(data):
             process['gantt'].append(temp)
             temp = {}
             temp['start'] = time
-            temp['no'] = i + 1
+            temp['no'] = x[i]['no']
         time += x[i]['bt']
         x[i]['ct'] = time
         x[i]['tat'] = time - x[i]['at']
@@ -234,12 +234,14 @@ def sjf(data):
                 a_wt += temp['wt']
                 left -= 1
                 flag =1
+                break
         if(flag==0):
             process['gantt'].append({'no' : -1, 'start' : time, 'stop' : time+1})
             time += 1
 
     for i, bt in enumerate(tbt):
         process['table'][i]['bt'] = bt
+    process['table'] = sorted(process['table'], key=itemgetter('ct'))
     return process
 
 def prepri(data):
@@ -329,7 +331,7 @@ def prepri(data):
                     proc = min
             else:
                 proc = -1
-
+    process['table'] = sorted(process['table'], key=itemgetter('ct'))
     return process
 
 
@@ -371,4 +373,5 @@ def priority(data):
 
     for i, bt in enumerate(tbt):
         process['table'][i]['bt'] = bt
+    process['table'] = sorted(process['table'], key=itemgetter('ct'))
     return process
