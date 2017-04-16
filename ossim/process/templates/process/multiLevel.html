@@ -173,6 +173,8 @@
       }
 
 
+      total = sequence.length;
+
       var new_sequence = []
       if(sequence[0].start!=0) new_sequence.push({start:0,stop:sequence[0].start,no:-1,type:"IDLE"});
 
@@ -185,6 +187,7 @@
       }
 
       sequence = new_sequence;
+      total = sequence.length;
 
       console.log(qstat);
       total = sequence.length;
