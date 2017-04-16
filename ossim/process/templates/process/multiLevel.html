@@ -58,12 +58,13 @@
       Gantt chart
     </h3>
     </div>
+    <div id="gantth"></div>
     <br><br>
     <div id="outer-div">
   </div>
     <br><br>
 </div>
-	
+
 
  <div class="panel panel-primary">
   <div class="panel-heading">
@@ -112,13 +113,13 @@
 
 //result queues , gantt,table
     function displayQueue(){
-	qstat = [{'FQ':[1,2,3,4,5],'BQ':[2,3]},{'FQ':[1,2],'BQ':[2,3]},{'FQ':[1,3],'BQ':[2]}]
+	// qstat = [{'FQ':[1,2,3,4,5],'BQ':[2,3]},{'FQ':[1,2],'BQ':[2,3]},{'FQ':[1,3],'BQ':[2]}]
 	var i;
   var output = document.getElementById("qstat");
   output.setAttribute("style","height:"+150*qstat.length+"px;padding:10px;");
 	for(i=0;i<qstat.length;++i){
     var card = document.createElement("div");
-    card.insertAdjacentHTML( 'beforeend', "<h4>Iteration "+i+"</h4><hr style='border-top: 1px solid #3c763d;'>" );
+    card.insertAdjacentHTML( 'beforeend', "<h4>t = "+qstat[i].time+"</h4><hr style='border-top: 1px solid #3c763d;'>" );
     card.setAttribute("style","text-align:center");
     var lcard = document.createElement("div");
     lcard.setAttribute("id","lqstat"+i);
@@ -151,7 +152,7 @@
     card.insertAdjacentHTML( 'beforeend', "<hr style='border-top: 1px solid #3c763d;'>")
 	}
     }
-    displayQueue();
+
     $('#sender').click(function(){
     var text = JSON.stringify(stuff);
     var alg = JSON.stringify("MULTIQ");
@@ -163,18 +164,41 @@
       sequence = result["gantt"];
       a = result["table"]
       qstat = result["queues"];
+
+      avgwt =0;
+      avgtat =0;
+      for(i=0;i<a.length;++i){
+        avgwt += a[i].wt;
+        avgtat += a[i].tat;
+      }
+
+
+      var new_sequence = []
+      if(sequence[0].start!=0) new_sequence.push({start:0,stop:sequence[0].start,no:-1,type:"IDLE"});
+
+      new_sequence.push(sequence[0])
+
+      for(i=1;i<total;i++){
+        if(sequence[i].start!=sequence[i-1].stop)
+          new_sequence.push({start:sequence[i-1].stop,stop:sequence[i].start,no:-1,type:"IDLE"});
+        new_sequence.push(sequence[i]);
+      }
+
+      sequence = new_sequence;
+
       console.log(qstat);
       total = sequence.length;
       pixel = 0;
       i = 0;
-      $('#outer-div,#comments,#ptable').empty();
+      $('#outer-div,#comments,#ptable,#qstat,#gantth').empty();
       // $('#thead').append('<th>PNO.</th> <th>Arrival time</th>  <th>Burst time</th>  <th>Completion time</th>  <th>Waiting time</th>  <th>Turn-around time</th>');
       totalTime = sequence[total-1].stop;
       pixel = parseInt(800/totalTime);
       containerWidth = pixel*totalTime + 2;
       $('#outer-div').css('width',containerWidth+'px');
       displayBlock(i);
-      
+      displayQueue();
+
     });
     });
 </script>

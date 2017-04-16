@@ -102,6 +102,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
+  $('#sel1').change(function(){
+    if($('#sel1').val() === "Round-Robin(RR)")
+      $('#tq').append('Time quantum: <input style="width:200px;" id="mytq" class="form-control" type="text" value=""></input>');
+    else $('#tq').empty();
+  });
     $('#sender').click(function(){
     var mytq = JSON.stringify(2);
     if($('#sel1').val() === "Round-Robin(RR)"){
@@ -119,7 +124,7 @@
         avgwt += a[i].wt;
         avgtat += a[i].tat;
       }
-      
+
       total = sequence.length;
       pixel = 0;
       i = 0;
@@ -132,10 +137,6 @@
       displayBlock(i);
     });
     });
-    $('#sel1').change(function(){
-      if($('#sel1').val() === "Round-Robin(RR)")
-        $('#tq').append('Time quantum: <input style="width:200px;" id="mytq" class="form-control" type="text" value=""></input>');
-      else $('#tq').empty();
-    });
+
 
 </script>

@@ -6,8 +6,8 @@
   <title>
     Process
   </title>
-  <script type='text/javascript' src='{% static 'js/inputpri.js' %}'></script>
-  <script type='text/javascript' src='{% static 'js/displaypri.js' %}'></script>
+  <script type='text/javascript' src='{% static 'js/input1.js' %}'></script>
+  <script type='text/javascript' src='{% static 'js/display1.js' %}'></script>
   <link rel="stylesheet" href='{% static 'css/demo1.css' %}'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -20,7 +20,7 @@
   <div class="panel panel-primary">
       <div class="panel-heading"><h1 style="text-alig
         var text = JSON.strn:center;">
-        Priority Process Scheduling
+        MultiLevel Queue Scheduling
       </h1></div>
   <div class="panel-body">
 
@@ -38,24 +38,19 @@
         </div>
         <div style="width:300px;float:left;text-align:left;">
           Enter Priority:
-          <br>
-          <input style="width:200px;float:left;" id="newPriority" class="form-control" type="text" value=""></input>
-          <button class="btn btn-success" onclick="addToList()" style="float:left;margin-left:10px;">Add</button>
+                  <br>
+                      <select class="form-control" id="sel1" style="width:200px;">
+                        <option>Foreground Process(1)</option>
+                        <option>Background Process(0)</option>
+                      </select>
+                  </div>
+          <button class="btn btn-success" onclick="addToList()" style="float:left;margin-top:20px;margin-left:10px;">Add</button>
         </div>
-    </div>
-
-    <div style="float:left;">
-  <label for="sel1" style="float:left;">Select Algorithm to be used :</label>
-  <br>
-      <select class="form-control" id="sel1" style="width:400px;">
-        <option>Preemptive Priority(PP)</option>
-        <option>Non-preemptive Priority(NPP)</option>
-      </select>
     </div>
   </div>
 
     <div class="panel-footer" style="height:50px;">
-    	<button style="float:right;" id="sender" class="btn btn-primary">Send the entire data</button>
+      <button style="float:right;" id="sender" class="btn btn-primary">Send the entire data</button>
     </div>
   </div>
   <div class="panel panel-success">
@@ -72,34 +67,33 @@
 </div>
   <div class="panel panel-warning" style="width:50%;float:left;">
   <div class="panel-heading">
-  	<h3>Operations Taking Place</h3>
+    <h3>Operations Taking Place</h3>
   </div>
   <div id="comments" class="panel-content">
   </div>
 </div>
   <div class="panel panel-warning" style="width:50%;float:left;">
   <div class="panel-heading">
-  	<h3>Table</h3>
+    <h3>Table</h3>
   </div>
-  	<div class="panel-content">
-	<table id="ptab" class="table table-bordered">
- 	<thead>
- 	<tr id="thead">
- 	<th>PNO.</th>
-  <th>Priority</th>
-	<th>Arrival time</th>
-	<th>Burst time</th>
-	<th>Completion time</th>
-	<th>Waiting time</th>
-	<th>Turn-around time</th>
-	</tr>
-	<tbody id="ptable">
+    <div class="panel-content">
+  <table id="ptab" class="table table-bordered">
+  <thead>
+  <tr id="thead">
+  <th>PNO.</th>
+  <th>Arrival time</th>
+  <th>Burst time</th>
+  <th>Completion time</th>
+  <th>Waiting time</th>
+  <th>Turn-around time</th>
+  </tr>
+  <tbody id="ptable">
 
-	</tbody>
-	</thead>
-	</table>
-  	</div>
-  	</div>
+  </tbody>
+  </thead>
+  </table>
+    </div>
+    </div>
 </body>
 </html>
 
@@ -107,9 +101,11 @@
 <script type="text/javascript">
     $('#sender').click(function(){
     var text = JSON.stringify(stuff);
-    var alg = JSON.stringify($("#sel1").val().split("(")[1].split(")")[0])
+    var alg = JSON.stringify("MULTIQ");
+    var mytq = JSON.stringify(2);
     //console.log(text);
-    $.post('/process/gateway/',{value:text, algo:alg}, function(result){
+    console.log({value:text, algo:alg})
+    $.post('/process/gateway/',{value:text, algo:alg, tq:mytq}, function(result){
       sequence = result["gantt"];
       a = result["table"]
       avgwt =0;

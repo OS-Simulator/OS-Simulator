@@ -24,7 +24,7 @@ function drawTable(i){
     console.log(a[i]);
     if(a[i].pri==1) type = "FG";
     else type = "BG";
-    $("#ptable").append("<tr><td>"+type+a[i].no+"</td><td>"+a[i].pri+"</td><td>"+a[i].at+"</td><td>"+a[i].bt+"</td><td>"+a[i].ct+"</td><td>"+a[i].wt+"</td><td>"+a[i].tat+"</td></tr>");
+    $("#ptable").append("<tr><td>"+type+a[i].no+"</td><td>"+a[i].at+"</td><td>"+a[i].bt+"</td><td>"+a[i].ct+"</td><td>"+a[i].wt+"</td><td>"+a[i].tat+"</td></tr>");
   }
 
 }

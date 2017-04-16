@@ -56,6 +56,6 @@ def gateway(request):
             tq = json.loads(tq)
             table={'data':data,'tq':tq}
             queues,gantt,table = multilevel(table)
-            result = {"queues":queues, "gantt":gantt,"table":table}
+            result = {"queues":queues[:len(queues)-1], "gantt":gantt,"table":table}
         print(result)
     return JsonResponse(result)

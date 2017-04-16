@@ -67,6 +67,7 @@ def rr(data,tq):
 
     for i, bt in enumerate(tbt):
         process['table'][i]['bt'] = bt
+    process['table'] = sorted(process['table'], key=itemgetter('ct'))
     return process
 
 def srtf(data):
@@ -434,7 +435,7 @@ def multilevel(table):
             prevCTK=CTK
             CTK=process["Foreground"][countR]["at"] #Update here
             updateQ(prevCTK,CTK)
-            queues.append({"FQ":Forequeue[:],"BQ":Backqueue[:],"time":CTK}.copy())
+            queues.append({"FQ":list(set(Forequeue[:])),"BQ":list(set(Backqueue[:])),"time":CTK}.copy())
             #print queues
 
             while not Q.empty():
@@ -460,7 +461,7 @@ def multilevel(table):
                     output.append(temp)
 
                     Forequeue.remove(Gtemp["no"])
-                    queues.append({"FQ":Forequeue[:],"BQ":Backqueue[:],"time":CTK}.copy())
+                    queues.append({"FQ":list(set(Forequeue[:])),"BQ":list(set(Backqueue[:])),"time":CTK}.copy())
                     #print queues
 
                 else:
@@ -469,7 +470,7 @@ def multilevel(table):
                     prevCTK=CTK
                     CTK+=TQ
                     updateQ(prevCTK,CTK)
-                    queues.append({"FQ":Forequeue[:],"BQ":Backqueue[:],"time":CTK}.copy())
+                    queues.append({"FQ":list(set(Forequeue[:])),"BQ":list(set(Backqueue[:])),"time":CTK}.copy())
                     #print queues
                     Gtemp["stop"]=CTK
                     temp["BTL"]-=TQ
@@ -494,7 +495,7 @@ def multilevel(table):
                 prevCTK=CTK
                 CTK=Breakpoint #Update here
                 updateQ(prevCTK,CTK)
-                queues.append({"FQ":Forequeue[:],"BQ":Backqueue[:],"time":CTK}.copy())
+                queues.append({"FQ":list(set(Forequeue[:])),"BQ":list(set(Backqueue[:])),"time":CTK}.copy())
                 #print queues
                 return
 
@@ -503,7 +504,7 @@ def multilevel(table):
                 prevCTK=CTK
                 CTK=process["Background"][countF]["at"] #Update here
                 updateQ(prevCTK,CTK)
-                queues.append({"FQ":Forequeue[:],"BQ":Backqueue[:],"time":CTK}.copy())
+                queues.append({"FQ":list(set(Forequeue[:])),"BQ":list(set(Backqueue[:])),"time":CTK}.copy())
                 #print queues
 
             if(CTK+process["Background"][countF]["BTL"]<=Breakpoint):
@@ -521,7 +522,7 @@ def multilevel(table):
 
                 countF+=1 #Remove here
                 Backqueue.remove(countF)
-                queues.append({"FQ":Forequeue[:],"BQ":Backqueue[:],"time":CTK}.copy())
+                queues.append({"FQ":list(set(Forequeue[:])),"BQ":list(set(Backqueue[:])),"time":CTK}.copy())
 
 
                 #print queues
@@ -534,7 +535,7 @@ def multilevel(table):
                 prevCTK=CTK
                 CTK=Breakpoint  #Update here
                 updateQ(prevCTK,CTK)
-                queues.append({"FQ":Forequeue[:],"BQ":Backqueue[:],"time":CTK}.copy())
+                queues.append({"FQ":list(set(Forequeue[:])),"BQ":list(set(Backqueue[:])),"time":CTK}.copy())
                 #print queues
 
                 return
