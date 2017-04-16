@@ -2,9 +2,7 @@ from queue import *
 from operator import itemgetter
 
 
-countR = 0
-countF = 0
-CTK = 0
+
 def rr(data,tq):
 
     process = {}
@@ -391,7 +389,7 @@ def multilevel(table):
     process["Gantt"]=[]
     output = []
     for element in table["data"]:
-        if element["pri"] == 0:
+        if element["pri"] == 1:
             element["BTL"]=element["bt"]
             process["Foreground"].append(element)
         else:
@@ -405,6 +403,9 @@ def multilevel(table):
 
     NoFg = len(process["Foreground"])
     NoBg= len(process["Background"])
+    countR = 0
+    countF = 0
+    CTK = 0
 
     def updateQ(prev,current):
         for proc in process["Foreground"]:
@@ -421,15 +422,13 @@ def multilevel(table):
 
             #raw_input()  #Used to #print current state of queues[] for debugging purpose
 
-    def RoundRobin():
-        global CTK
-        global countR
-        global countF
+    def RoundRobin(countR,countF,CTK):
+
 
         while countR<NoFg:
             if(process["Foreground"][countR]["at"]>CTK):
 
-                FCFS(process["Foreground"][countR]["at"])
+                FCFS(process["Foreground"][countR]["at"],countR,countF,CTK)
             Q.put(process["Foreground"][countR])
 
             prevCTK=CTK
@@ -484,12 +483,10 @@ def multilevel(table):
                 if temp["BTL"]!=0:
                     Q.put(temp)
 
-        FCFS(float('inf'))
+        FCFS(float('inf'),countR,countF,CTK)
 
-    def FCFS(Breakpoint):
-        global CTK
-        global countR
-        global countF
+    def FCFS(Breakpoint,countR,countF,CTK):
+
 
         while countF<NoBg:
             if (process["Background"][countF]["at"]>=Breakpoint):
@@ -547,6 +544,6 @@ def multilevel(table):
     queues=[]
     Forequeue=[]
     Backqueue=[]
-    RoundRobin()
+    RoundRobin(countR,countF,CTK)
 
     return queues,process["Gantt"],output

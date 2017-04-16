@@ -36,7 +36,7 @@ def gateway(request):
         data = json.loads(data)
         alg = request.POST.get('algo')
         alg=json.loads(alg)
-
+        print(data)
         if(alg=="RR"):
         	tq = request.POST.get('tq')
         	tq = json.loads(tq)
