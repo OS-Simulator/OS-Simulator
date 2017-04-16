@@ -6,6 +6,7 @@ app_name = 'synchro'
 urlpatterns =[
     url(r'^semaphores/$', views.semaphores, name='semaphores'),
     url(r'^socket/$', views.socket, name='socket'),
+    url(r'^deadlocks/$', views.deadlocks, name='deadlocks'),
     url(r'^semaphores/demo/(?P<pk>[0-9]+)/$', views.sem_demo, name='sem_demo'),
     url(r'^socket/demo/(?P<pk>[0-9]+)/$', views.socket_demo, name='socket_demo'),
 

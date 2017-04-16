@@ -14,8 +14,8 @@ def socket(request):
     context = {'algos': algos}
     return render(request, 'synchro/socket_index.html',context = context)
 
-def demo(request):
-    return render(request,'memory/page.html')
+def deadlocks(request):
+    return render(request,'synchro/bankers.html')
 
 
 def sem_demo(request,pk):
