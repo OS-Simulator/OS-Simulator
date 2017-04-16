@@ -1,11 +1,13 @@
 var stuff = [];
 var index = 1;
+var index1 = 1;
   function addToList() {
       // body...
       var arrivaltime = document.getElementById("newarrivaltime").value;
       var bursttime = document.getElementById("newbursttime").value;
       var priority = document.getElementById("sel1").value.split("(")[1].split(")")[0];
       console.log(priority);
+      if(parseInt(priority) == 0){
       stuff.push({
           "at": parseInt(arrivaltime),
           "bt": parseInt(bursttime),
@@ -13,8 +15,16 @@ var index = 1;
           "no": index
       });
       index = index +1;
-      //arrivaltime.value="";
-      //bursttime.value="";
+      }
+      if(parseInt(priority) == 1){
+      stuff.push({
+          "at": parseInt(arrivaltime),
+          "bt": parseInt(bursttime),
+          "pri": parseInt(priority),
+          "no": index1
+      });
+      index1 = index1 +1;
+      }
       displayList();
       document.getElementById("newarrivaltime").value="";
       document.getElementById("newbursttime").value="";
@@ -46,7 +56,7 @@ var index = 1;
       for (var i = 0; i < stuff.length; i++) {
           var card = document.createElement("div");
           var pno = document.createElement("span");
-          pno.textContent = "P"+(i+1)+"    ";
+          pno.textContent = "P"+stuff[i].no+"    ";
 	  pno.setAttribute("style","float:left;");
 	  card.setAttribute("style","height:50px;width:100%;");
           card.setAttribute("class", "card");
@@ -92,15 +102,4 @@ var index = 1;
       }
   }
 
-  /*function download() {
-      var text = JSON.stringify(stuff);
-      filearrivaltime = "stuff.json";
-      var element = document.createElement('a');
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-      element.setAttribute('download', filearrivaltime);
-      element.style.display = 'none';
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
 
-  }*/
