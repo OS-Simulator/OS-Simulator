@@ -100,8 +100,9 @@
 <script type="text/javascript">
     $('#sender').click(function(){
     var text = JSON.stringify(stuff);
-    var alg = JSON.stringify($("#sel1").val().split("(")[1].split(")")[0])
+    var alg = "MULTIQ"
     //console.log(text);
+    console.log({value:text, algo:alg})
     $.post('/process/gateway/',{value:text, algo:alg}, function(result){
       sequence = result["gantt"];
       a = result["table"]

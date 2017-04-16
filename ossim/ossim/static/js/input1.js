@@ -4,8 +4,8 @@ var index = 1;
       // body...
       var arrivaltime = document.getElementById("newarrivaltime").value;
       var bursttime = document.getElementById("newbursttime").value;
-      var priority = document.getElementById("newPriority").value;
-
+      var priority = document.getElementById("sel1").value.split("(")[1].split(")")[0];
+      console.log(priority);
       stuff.push({
           "at": parseInt(arrivaltime),
           "bt": parseInt(bursttime),
@@ -18,7 +18,7 @@ var index = 1;
       displayList();
       document.getElementById("newarrivaltime").value="";
       document.getElementById("newbursttime").value="";
-      document.getElementById("newPriority").value="";
+      // document.getElementById("sel1").value="";
 
   }
   function edit(id) {
