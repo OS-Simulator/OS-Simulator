@@ -112,20 +112,21 @@
 
 //result queues , gantt,table
     function displayQueue(){
-	qstat = [{'FQ':[1,2,3],'BQ':[2,3]},{'FQ':[1,2],'BQ':[2,3]},{'FQ':[1,3],'BQ':[2]}]
+	qstat = [{'FQ':[1,2,3,4,5],'BQ':[2,3]},{'FQ':[1,2],'BQ':[2,3]},{'FQ':[1,3],'BQ':[2]}]
 	var i;
   var output = document.getElementById("qstat");
   output.setAttribute("style","height:"+150*qstat.length+"px;padding:10px;");
 	for(i=0;i<qstat.length;++i){
     var card = document.createElement("div");
-    card.insertAdjacentHTML( 'beforeend', "<hr>" );
+    card.insertAdjacentHTML( 'beforeend', "<h4>Iteration "+i+"</h4><hr style='border-top: 1px solid #3c763d;'>" );
+    card.setAttribute("style","text-align:center");
     var lcard = document.createElement("div");
     lcard.setAttribute("id","lqstat"+i);
-    lcard.setAttribute("style","float:left;width:50%;;height:100px");
+    lcard.setAttribute("style","float:left;width:50%;;height:80px");
 
     var rcard = document.createElement("div");
     rcard.setAttribute("id","rqstat"+i);
-    rcard.setAttribute("style","float:right;width:50%;height:100px");
+    rcard.setAttribute("style","float:right;width:50%;height:80px");
     lcard.insertAdjacentHTML( 'beforeend', "<div style='float:left;'>Foreground : </div>" );
 
 		var j;
@@ -146,9 +147,8 @@
     card.appendChild(rcard);
     output.appendChild(card)
     console.log(output);
-    card.insertAdjacentHTML( 'beforeend', "<hr>" );
 
-		$("#qstat").append("<br><br><br>");	
+    card.insertAdjacentHTML( 'beforeend', "<hr style='border-top: 1px solid #3c763d;'>")
 	}
     }
     displayQueue();
