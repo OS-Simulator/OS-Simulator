@@ -100,10 +100,11 @@
 <script type="text/javascript">
     $('#sender').click(function(){
     var text = JSON.stringify(stuff);
-    var alg = "MULTIQ"
+    var alg = JSON.stringify("MULTIQ");
+    var mytq = JSON.stringify(2);
     //console.log(text);
     console.log({value:text, algo:alg})
-    $.post('/process/gateway/',{value:text, algo:alg}, function(result){
+    $.post('/process/gateway/',{value:text, algo:alg, tq:mytq}, function(result){
       sequence = result["gantt"];
       a = result["table"]
       total = sequence.length;

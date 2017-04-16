@@ -52,7 +52,10 @@ def gateway(request):
         elif(alg=="NPP"):
             result = priority(data)
         elif(alg=="MULTIQ"):
-            queues,gantt,table = multilevel(data)
+            tq = request.POST.get('tq')
+            tq = json.loads(tq)
+            table={'data':data,'tq':tq}
+            queues,gantt,table = multilevel(table)
             result = {"queues":queues, "gantt":gantt,"table":table}
         print(result)
     return JsonResponse(result)

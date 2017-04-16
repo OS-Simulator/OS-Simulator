@@ -2,6 +2,9 @@ from queue import *
 from operator import itemgetter
 
 
+countR = 0
+countF = 0
+CTK = 0
 def rr(data,tq):
 
     process = {}
@@ -388,7 +391,7 @@ def multilevel(table):
     process["Gantt"]=[]
     output = []
     for element in table["data"]:
-        if element["type"] == 0:
+        if element["pri"] == 0:
             element["BTL"]=element["bt"]
             process["Foreground"].append(element)
         else:
@@ -399,6 +402,9 @@ def multilevel(table):
 
     process["Foreground"] = sorted(process["Foreground"], key=itemgetter("at"))
     process["Background"] = sorted(process["Background"], key=itemgetter("at"))
+
+    NoFg = len(process["Foreground"])
+    NoBg= len(process["Background"])
 
     def updateQ(prev,current):
         for proc in process["Foreground"]:
