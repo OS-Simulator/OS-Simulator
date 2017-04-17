@@ -3,9 +3,9 @@
 	<head>
 		<title>Safety Algorithm</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 			<style>
                 h1, h2{
@@ -378,57 +378,66 @@
 
 	</head>
 	<body>
+		<div class = "panel panel-primary"
+	        style="margin : 0.25cm 0.25cm 0.25cm 0.25cm;">
+	        <div class="panel-heading">
+	            <h2>Banker's Algorithm</h2>
+	        </div>
+			<div class="panel-body">
+				<form name = "resource">
+		            <div class = "form-group" style="margin-left:50px; float:left;">
+					<label>Number of Resource types:</label><input class="form-control" type="Number" onkeyup="BuildFormFields(parseInt(this.value, 10));" />
+					<div id="FormFields" style=""></div>
+		            </div>
+				</form>
+		        <form name = "Need">
+		            <div class = "form-group" style="margin-left:50px;float:left;">
+					<label>Number of Processes:</label> <input class="form-control" type="Number" onkeyup="BuildFormFields2(y = parseInt(this.value, 10));" />
+					<div id="FormFields1"></div>
+		            </div>
+					<!-- <button type="button" onclick="banker()">Try it</button> -->
+				</form>
+				 <form name = "Alloc">
+		             <div class = "form-group" style="margin-left:50px;float:left;margin-top:60px;">
+					<div id="FormFields2"></div>
+		            </div>
+				</form>
+				<!-- <button type="button" onclick="banker()">Try it</button> -->
+		        <!-- <br>
+		        <br>
+		        <br>
+		        <br><br>
+		        <br><br>
+		        <br>
+		        <br> -->
 
-        <h1>Banker's Algorithm</h1>
-		<form name = "resource">
-            <div class = "form-group" style="margin-left:50px; float:left;">
-			<label>Number of Resource types:</label><input class="form-control" type="Number" onkeyup="BuildFormFields(parseInt(this.value, 10));" />
-			<div id="FormFields" style=""></div>
-			<!--<input type="submit" onsubmit="hello()"/>-->
-            </div>
-		</form>
-        <form name = "Need">
-            <div class = "form-group" style="margin-left:50px;float:left;">
-			<label>Number of Processes:</label> <input class="form-control" type="Number" onkeyup="BuildFormFields2(y = parseInt(this.value, 10));" />
-			<div id="FormFields1"></div>
-            </div>
-			<!--<input type="submit" />-->
-		</form>
-		 <form name = "Alloc">
-             <div class = "form-group" style="margin-left:50px;float:left;margin-top:60px;">
-			<div id="FormFields2"></div>
-			<!--<input type="submit" onsubmit = "func()"/>-->
-            </div>
-		</form>
-		<button type="button" onclick="banker()" style = "float:right;margin-right:200px;margin-top:150px;">Try it</button>
-        <br>
-        <br>
-        <br>
-        <br><br>
-        <br><br>
-        <br>
-        <br>
-
-		<table id="tab_need" class="table table-hover">
-
-
-
-		</table>
-        <br>
-        <br>
-        <br>
-        <br><br>
-        <br><br>
-        <br>
-        <table id="tab_alloc" class="table table-hover">
+				<table id="tab_need" class="table table-hover">
 
 
-		</table>
 
-        <br>
-        <br>
-        <ul id = "printing">
+				</table>
+		        <!-- <br>
+		        <br>
+		        <br>
+		        <br><br>
+		        <br><br>
+		        <br> -->
+		        <table id="tab_alloc" class="table table-hover">
 
-        </ul>
+
+				</table>
+
+		        <!-- <br>
+		        <br> -->
+		        <ul id = "printing">
+
+		        </ul>
+	        </div>
+			<div class="panel-footer">
+	            <button class="btn btn-primary btn-success" onclick="banker()">Run</button>
+	        </div>
+		</div>
+
+
 	</body>
 </html>

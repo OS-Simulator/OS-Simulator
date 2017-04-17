@@ -24,7 +24,8 @@ urlpatterns = [
     url(r'^synchro/', include('synchro.urls')),
     url(r'^process/', include('process.urls')),
     url(r'^memory/', include('memory.urls')),
-    url(r'^mat/', include('mat.urls')),
+    url(r'^matdemo/', include('mat.urls')),
+    url(r'^mat/', views.matindex),
     url(r'^filesystem/', include('filesystem.urls')),
     url(r'^wiki/', include('wikipages.urls')),
 ]

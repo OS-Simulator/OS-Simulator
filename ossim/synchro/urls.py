@@ -9,5 +9,5 @@ urlpatterns =[
     url(r'^deadlocks/$', views.deadlocks, name='deadlocks'),
     url(r'^semaphores/demo/(?P<pk>[0-9]+)/$', views.sem_demo, name='sem_demo'),
     url(r'^socket/demo/(?P<pk>[0-9]+)/$', views.socket_demo, name='socket_demo'),
-
+    url(r'^bankalgo/$', views.bankalgo, name='bankalgo'),
 ]

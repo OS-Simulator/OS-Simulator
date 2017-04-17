@@ -15,8 +15,10 @@ def socket(request):
     return render(request, 'synchro/socket_index.html',context = context)
 
 def deadlocks(request):
-    return render(request,'synchro/bankers.html')
+    return render(request,'synchro/bankerindex.html')
 
+def bankalgo(request):
+    return render(request, 'synchro/bankers.html')
 
 def sem_demo(request,pk):
     if(pk=='1'):
