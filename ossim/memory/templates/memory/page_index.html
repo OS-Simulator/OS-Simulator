@@ -3,10 +3,34 @@
 {% block title %} <title> Memory Management </title> {% endblock %}
 
 
-
+{% block links %}
+{% load static %}
+<link href="{%static 'filesystem/styles.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
 
 {% block content %}
-<div class="main-container">
+<nav role="navigation" class="navbar navbar-default">
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/process/">Process Scheduling</a></li>
+            <li class="active"><a href="/memory/page/">Page Replacement</a></li>
+            <li><a href="/disk/">Disk Scheduling</a></li>
+            <li><a href="/synchro/semaphores/">Semaphores</a></li>
+            <li><a href="/synchro/socket/">Sockets</a></li>
+            <li><a href="/filesystem/">File Structure</a></li>
+            <li><a href="/mat/">Memory Allocation</a></li>
+        </ul>
+    </div>
+</nav>
+<h1>Page Replacement</h1>
+<div id="choice">
+    <ul id="ulchoice">
+        <a href="/memory/demo/"><li id="lichoice">Demo</li></a>
+        <a href="/wiki/pra/"><li id="wikichoice">Wiki</li></a>
+    </ul>
+</div>
+<!-- <div class="main-container">
   <div class="page-replacement">
     <h2>Page Replacement Algorithms</h2>
     {% for alg in algos %}
@@ -20,10 +44,9 @@
         <br>
         {% endif %}
       {% endfor %}
-        <!-- THIS IS COMMON DEMO BUTTON FOR ALL ABOVE ALGOS -->
         <a href="/memory/demo/" class="btn btn-primary">Demo</a><br>
 
-  </div>
+  </div> -->
 
 
 
@@ -32,7 +55,7 @@
 
 
 
-</div>
+
 {% endblock %}
 {% block style %}
 <style>

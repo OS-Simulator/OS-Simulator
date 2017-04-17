@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'ossim',
     'mat',
     'filesystem',
+    'wikipages',
 ]
 
 MIDDLEWARE = [

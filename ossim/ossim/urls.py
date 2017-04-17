@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^memory/', include('memory.urls')),
     url(r'^mat/', include('mat.urls')),
     url(r'^filesystem/', include('filesystem.urls')),
+    url(r'^wiki/', include('wikipages.urls')),
 ]

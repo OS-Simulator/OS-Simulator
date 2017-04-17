@@ -6,7 +6,7 @@
   height: 5px;
   position: absolute;
   background: white;
-  top: 68%;
+  top: 88%;
   left: 18%;
   }
   #animate {
@@ -30,7 +30,11 @@
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <div class="container-fluid">
+  <div class="panel panel-primary">
+  <div class="panel panel-heading">
     <center><h1>TCP socket programming</h1></center>
+    </div>
+    <div class="panel panel-body">
     <button class="btn btn-primary" type ="button", onclick ="socket()", style ="height:25px;width:125px;line-height:1">socket()</button> This  function shall create an unbound socket in a communications domain, and return a file descriptor that can be used in later function calls that operate on sockets.
     <br/><br/>
     <button id  = "bind" class="btn btn-primary" type ="button", onclick ="bind()", style ="height:25px;width:125px;line-height:1" disabled>bind()</button> This function shall assign a local socket address address to a socket identified by descriptor socket that has no local socket address assigned.
@@ -44,18 +48,19 @@
     <button id ="move" class="btn btn-primary" type ="button", onclick ="myMove()", style ="height:25px;width:125px;line-height:1" disabled>send()</button> This function sends a message on a socket
     <br/><br/>
     <button id ="close" class="btn btn-primary" type ="button", onclick ="closee()", style ="height:25px;width:125px;line-height:1" disabled>close</button> Close the connection
+    </div>
+</div>
+    <button type = "button", id ="server", name = "server", style="height:125px;width:125px;position:absolute;top:80%;left:10%;border-radius:125px;border:1px solid #000">Server </button>
+    <button type = "button", id ="client", name = "client", style="height:125px;width:125px;position:absolute;top:80%;left:80%;border-radius:125px;border:1px solid #000">Client </button>
 
-    <button type = "button", id ="server", name = "server", style="height:125px;width:125px;position:absolute;top:60%;left:10%;border-radius:125px;border:1px solid #000">Server </button>
-    <button type = "button", id ="client", name = "client", style="height:125px;width:125px;position:absolute;top:60%;left:80%;border-radius:125px;border:1px solid #000">Client </button>
+    <button type = "button", id ="one", name = "one", style="height:30px;width:30px;position:absolute;top:81%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="two", name = "two", style="height:30px;width:30px;position:absolute;top:86%;left:19%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="three", name = "three", style="height:30px;width:30px;position:absolute;top:91%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="four", name = "four", style="height:30px;width:30px;position:absolute;top:77%;left:20%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="five", name = "five", style="height:30px;width:30px;position:absolute;top:86%;left:22%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
+    <button type = "button", id ="six", name = "six", style="height:30px;width:30px;position:absolute;top:95%;left:20%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
 
-    <button type = "button", id ="one", name = "one", style="height:30px;width:30px;position:absolute;top:61%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
-    <button type = "button", id ="two", name = "two", style="height:30px;width:30px;position:absolute;top:66%;left:19%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
-    <button type = "button", id ="three", name = "three", style="height:30px;width:30px;position:absolute;top:71%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
-    <button type = "button", id ="four", name = "four", style="height:30px;width:30px;position:absolute;top:57%;left:20%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
-    <button type = "button", id ="five", name = "five", style="height:30px;width:30px;position:absolute;top:66%;left:22%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
-    <button type = "button", id ="six", name = "six", style="height:30px;width:30px;position:absolute;top:75%;left:20%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
-
-    <button type = "button", id ="connection", name = "connection", style="height:5px;width:953px;position:absolute;top:68%;left:18%;background-color:white;border:1px solid #FFFFFF"> </button>
+    <button type = "button", id ="connection", name = "connection", style="height:5px;width:953px;position:absolute;top:88%;left:18%;background-color:white;border:1px solid #FFFFFF"> </button>
 
     <div id ="container">
       <div id ="animate"></div>

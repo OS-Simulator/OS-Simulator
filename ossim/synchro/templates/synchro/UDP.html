@@ -31,8 +31,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <div class="container-fluid">
+    <div class="panel panel-primary">
+    <div class="panel panel-heading">
     <center><h1 >UDP socket programming <br /></h1></center>
-
+  </div>
+<div class="panel panel-body">
     <button class="btn btn-primary" type ="button", onclick ="socket()", style ="height:25px;width:125px;line-height:1">socket()</button> This function shall create an unbound socket in a communications domain, and return a file descriptor that can be used in later function calls that operate on sockets.
     <br/><br/>
     <button id ="bind" class="btn btn-primary" type ="button", onclick ="bind()", style ="height:25px;width:125px;line-height:1" disabled>bind()</button> This function shall assign a local socket address address to a socket identified by descriptor socket that has no local socket address assigned.
@@ -45,7 +48,7 @@
 
     <button type = "button", id ="server", name = "server", style="height:125px;width:125px;position:absolute;top:50%;left:10%;border-radius:125px;border:1px solid #000">Server </button>
     <button type = "button", id ="client", name = "client", style="height:125px;width:125px;position:absolute;top:50%;left:80%;border-radius:125px;border:1px solid #000">Client </button>
-
+</div>
     <button type = "button", id ="one", name = "one", style="height:30px;width:30px;position:absolute;top:51%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
     <button type = "button", id ="two", name = "two", style="height:30px;width:30px;position:absolute;top:56%;left:19%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
     <button type = "button", id ="three", name = "three", style="height:30px;width:30px;position:absolute;top:61%;left:18%;border-radius:30px;border:1px solid #FFFFFF;background-color:#FFFFFF"></button>
